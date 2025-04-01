@@ -52,5 +52,5 @@ body {
 }
 
 .active {
-  @apply border-l-secondaryBg;
+  @apply border-l-secondaryBg bg-secondaryBg/30 text-secondaryText opacity-100;
 }

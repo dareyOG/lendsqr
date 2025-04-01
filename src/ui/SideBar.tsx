@@ -2,12 +2,15 @@ import { Link, NavLink } from 'react-router-dom';
 
 import {
   FaBriefcase,
+  FaBuildingColumns,
   FaChartColumn,
+  FaClipboardList,
   FaCoins,
   FaFan,
   FaHandHoldingDollar,
   FaHandshake,
   FaMoneyBillTransfer,
+  FaPercent,
   FaPiggyBank,
   FaSackDollar,
   FaScroll,
@@ -35,7 +38,7 @@ function SideBar() {
   const businesses = [
     { pageTitle: 'Organization', path: '/organization', icon: <FaBriefcase /> },
     { pageTitle: 'Loan Products', path: '/loan-products', icon: <FaHandHoldingDollar /> },
-    { pageTitle: 'Saving Products', path: '/saving-products', icon: '' },
+    { pageTitle: 'Saving Products', path: '/saving-products', icon: <FaBuildingColumns /> },
     { pageTitle: 'Fees and Charges', path: '/fees-and-charges', icon: <FaCoins /> },
     { pageTitle: 'Transactions', path: '/transactions', icon: <FaMoneyBillTransfer /> },
     { pageTitle: 'Services', path: '/services', icon: <FaFan /> },
@@ -46,8 +49,8 @@ function SideBar() {
 
   const settings = [
     { pageTitle: 'Preferences', path: '/preferences', icon: <FaSliders /> },
-    { pageTitle: 'Fees and Pricing', path: '/fees-and-pricing', icon: '' },
-    { pageTitle: 'Audit Logs', path: '/audit-logs', icon: '' }
+    { pageTitle: 'Fees and Pricing', path: '/fees-and-pricing', icon: <FaPercent /> },
+    { pageTitle: 'Audit Logs', path: '/audit-logs', icon: <FaClipboardList /> }
   ];
 
   return (
@@ -62,24 +65,23 @@ function SideBar() {
       <nav className="py-[3rem] flex flex-col gap-y-[2.5rem] ">
         <Link
           to="/dashboard"
-          className="mx-[3rem] w-fit flex items-center gap-[1.2rem] text-primaryText opacity-60 hover:text-secondaryText hover:opacity-100"
+          className="mx-[3rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
         >
           <FaHome />
           <span>Dashboard</span>
         </Link>
 
-        <div>
-          <h1 className="uppercase text-[1.2rem] pl-[3rem] text-primaryText">customers</h1>
-          <ul className="flex flex-col gap-[1.2rem]">
+        <div className="">
+          <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
+            customers
+          </h1>
+          <ul className="flex flex-col gap-[1.2rem] ">
             {customers.map(customer => (
-              <li
-                key={customer.path}
-                className="text-primaryText opacity-60 hover:text-secondaryText hover:opacity-100 hover:bg-secondaryBg/20"
-              >
+              <li key={customer.path}>
                 <NavLink
                   to={customer.path}
                   className={
-                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]'
+                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]  hover:opacity-100 hover:bg-secondaryBg/20 text-secondaryText opacity-50'
                   }
                 >
                   {customer.icon}
@@ -91,17 +93,16 @@ function SideBar() {
         </div>
 
         <div>
-          <h1 className="uppercase text-[1.2rem] pl-[3rem] text-primaryText">businesses</h1>
-          <ul className="flex flex-col gap-[1.2rem]">
+          <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
+            businesses
+          </h1>
+          <ul className="flex flex-col gap-[1.2rem] ">
             {businesses.map(business => (
-              <li
-                key={business.path}
-                className="text-primaryText opacity-60 hover:text-secondaryText hover:opacity-100 hover:bg-secondaryBg/20"
-              >
+              <li key={business.path}>
                 <NavLink
                   to={business.path}
                   className={
-                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]'
+                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]  hover:opacity-100 hover:bg-secondaryBg/20 text-secondaryText opacity-50'
                   }
                 >
                   {business.icon}
@@ -113,17 +114,16 @@ function SideBar() {
         </div>
 
         <div>
-          <h1 className="uppercase text-[1.2rem] pl-[3rem] text-primaryText">settings</h1>
-          <ul className="flex flex-col gap-[1.2rem]">
+          <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
+            settings
+          </h1>
+          <ul className="flex flex-col gap-[1.2rem] ">
             {settings.map(setting => (
-              <li
-                key={setting.path}
-                className="text-primaryText opacity-60 hover:text-secondaryText hover:opacity-100 hover:bg-secondaryBg/20"
-              >
+              <li key={setting.path}>
                 <NavLink
                   to={setting.path}
                   className={
-                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]'
+                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]  hover:opacity-100 hover:bg-secondaryBg/20 text-secondaryText opacity-50'
                   }
                 >
                   {setting.icon}
@@ -139,5 +139,3 @@ function SideBar() {
 }
 
 export default SideBar;
-
-// bg-primaryBg drop-shadow-[0_35px_35px_rgba(0,5,20,0.4)]
