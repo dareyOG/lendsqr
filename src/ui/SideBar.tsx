@@ -5,19 +5,16 @@ import SideBarMenuItem from './SideBarMenuItem';
 
 import {
   FaBriefcase,
-  FaBuildingColumns,
   FaChartColumn,
-  FaClipboardList,
   FaCoins,
   FaFan,
   FaHandHoldingDollar,
   FaHandshake,
+  FaLandmark,
   FaMoneyBillTransfer,
-  FaPercent,
   FaPiggyBank,
   FaSackDollar,
   FaScroll,
-  FaSliders,
   FaUserCheck,
   FaUserGear,
   FaUserGroup,
@@ -25,6 +22,8 @@ import {
   FaUserXmark
 } from 'react-icons/fa6';
 import { FaHome } from 'react-icons/fa';
+import { HiClipboardList } from 'react-icons/hi';
+import { HiAdjustmentsHorizontal, HiPercentBadge } from 'react-icons/hi2';
 
 import { ItemType } from '../types';
 
@@ -43,7 +42,7 @@ function SideBar() {
   const businesses: ItemType[] = [
     { pageTitle: 'Organization', path: '/organization', icon: <FaBriefcase /> },
     { pageTitle: 'Loan Products', path: '/loan-products', icon: <FaHandHoldingDollar /> },
-    { pageTitle: 'Saving Products', path: '/saving-products', icon: <FaBuildingColumns /> },
+    { pageTitle: 'Saving Products', path: '/saving-products', icon: <FaLandmark /> },
     { pageTitle: 'Fees and Charges', path: '/fees-and-charges', icon: <FaCoins /> },
     { pageTitle: 'Transactions', path: '/transactions', icon: <FaMoneyBillTransfer /> },
     { pageTitle: 'Services', path: '/services', icon: <FaFan /> },
@@ -53,13 +52,13 @@ function SideBar() {
   ];
 
   const settings: ItemType[] = [
-    { pageTitle: 'Preferences', path: '/preferences', icon: <FaSliders /> },
-    { pageTitle: 'Fees and Pricing', path: '/fees-and-pricing', icon: <FaPercent /> },
-    { pageTitle: 'Audit Logs', path: '/audit-logs', icon: <FaClipboardList /> }
+    { pageTitle: 'Preferences', path: '/preferences', icon: <HiAdjustmentsHorizontal /> },
+    { pageTitle: 'Fees and Pricing', path: '/fees-and-pricing', icon: <HiPercentBadge /> },
+    { pageTitle: 'Audit Logs', path: '/audit-logs', icon: <HiClipboardList /> }
   ];
 
   return (
-    <aside className="scroll-auto">
+    <aside className="scroll-auto py-14">
       <div className=" text-secondaryText mx-[3rem] flex items-center gap-[1.2rem]">
         <FaBriefcase />
         <select name="organization" className="capitalize outline-0">
@@ -69,7 +68,7 @@ function SideBar() {
 
       <nav className="py-[3rem] flex flex-col gap-y-[2.5rem] ">
         <Link
-          to="/dashboard"
+          to="/"
           className="mx-[3rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
         >
           <FaHome />

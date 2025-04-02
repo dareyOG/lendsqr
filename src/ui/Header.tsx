@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
+
 import Logo from './Logo';
 import SearchBar from './SearchBar';
 import Avatar from './Avatar';
+
 import { FaRegBell } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -12,8 +14,8 @@ function Header() {
         <SearchBar />
       </div>
 
-      <div className="flex items-center gap-x-[5rem] text-primaryText [&_*]:cursor-pointer">
-        <Link to="/docs" className="underline">
+      <div className="flex items-center gap-x-[5rem] text-primaryText [&>*:not(:last-child)]:cursor-pointer">
+        <Link to="/" className="underline">
           Docs
         </Link>
         <FaRegBell />

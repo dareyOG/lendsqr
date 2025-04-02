@@ -28,7 +28,7 @@
   --color-secondaryBg: #39cdcc;
 
   --color-users: #df18ff;
-  --color-aciveUsers: #5718ff;
+  --color-activeUsers: #5718ff;
   --color-savings: #ff3366;
   --color-loans: #f55f44;
 
@@ -41,12 +41,12 @@
   --font-login: 'Avenir Next lt', sans-serif;
 }
 
-html {
-  @apply text-[62.5%] leading-[1.5];
+:root {
+  @apply text-[62.5%] box-border m-0 p-0;
 }
 
 body {
-  @apply text-[1.6rem];
+  @apply text-[1.6rem] leading-[1.5] text-primaryText bg-primaryBg;
 }
 
 .active {

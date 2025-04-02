@@ -1,18 +1,17 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import AppLayout from './ui/AppLayout';
-
-import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
+
+import AppLayout from './ui/AppLayout';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route index element={<Navigate replace to={'dashboard'} />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route index element={<Navigate replace to={'users'} />} />
+          <Route path="dashboard" element={<Users />} />
           <Route path="users" element={<Users />} />
           <Route path="guarantors" element={<Users />} />
           <Route path="loans" element={<Users />} />
