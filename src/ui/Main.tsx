@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-
-import SideBar from './Sidebar';
+import SideBar from './SideBar';
 
 function Main({ children }: { children: ReactNode }) {
   return (

@@ -21,13 +21,11 @@
 @import 'tailwindcss';
 
 @theme {
-  --*: initial;
+  --color-primaryText: #213f7d;
+  --color-secondaryText: #54557d;
 
   --color-primaryBg: #ffffff;
   --color-secondaryBg: #39cdcc;
-
-  --color-primaryText: #54557d;
-  --color-secondaryText: #213f7d;
 
   --color-users: #df18ff;
   --color-aciveUsers: #5718ff;

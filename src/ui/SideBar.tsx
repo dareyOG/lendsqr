@@ -1,4 +1,7 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import SideBarMenu from './SideBarMenu';
+import SideBarMenuItem from './SideBarMenuItem';
 
 import {
   FaBriefcase,
@@ -23,8 +26,10 @@ import {
 } from 'react-icons/fa6';
 import { FaHome } from 'react-icons/fa';
 
+import { ItemType } from '../types';
+
 function SideBar() {
-  const customers = [
+  const customers: ItemType[] = [
     { pageTitle: 'Users', path: '/users', icon: <FaUserGroup /> },
     { pageTitle: 'Guarantors', path: '/guarantors', icon: <FaUsers /> },
     { pageTitle: 'Loans', path: '/loans', icon: <FaSackDollar /> },
@@ -35,7 +40,7 @@ function SideBar() {
     { pageTitle: 'Karma', path: '/karma', icon: <FaUserXmark /> }
   ];
 
-  const businesses = [
+  const businesses: ItemType[] = [
     { pageTitle: 'Organization', path: '/organization', icon: <FaBriefcase /> },
     { pageTitle: 'Loan Products', path: '/loan-products', icon: <FaHandHoldingDollar /> },
     { pageTitle: 'Saving Products', path: '/saving-products', icon: <FaBuildingColumns /> },
@@ -47,7 +52,7 @@ function SideBar() {
     { pageTitle: 'Reports', path: '/reports', icon: <FaChartColumn /> }
   ];
 
-  const settings = [
+  const settings: ItemType[] = [
     { pageTitle: 'Preferences', path: '/preferences', icon: <FaSliders /> },
     { pageTitle: 'Fees and Pricing', path: '/fees-and-pricing', icon: <FaPercent /> },
     { pageTitle: 'Audit Logs', path: '/audit-logs', icon: <FaClipboardList /> }
@@ -55,12 +60,12 @@ function SideBar() {
 
   return (
     <aside className="scroll-auto">
-      <select name="organization" className="capitalize outline-0 text-primaryText mx-[3rem]">
-        <option value={''}>
-          <FaBriefcase />
-          <span>switch organization</span>
-        </option>
-      </select>
+      <div className=" text-secondaryText mx-[3rem] flex items-center gap-[1.2rem]">
+        <FaBriefcase />
+        <select name="organization" className="capitalize outline-0">
+          <option value={''}>switch organization</option>
+        </select>
+      </div>
 
       <nav className="py-[3rem] flex flex-col gap-y-[2.5rem] ">
         <Link
@@ -71,7 +76,32 @@ function SideBar() {
           <span>Dashboard</span>
         </Link>
 
-        <div className="">
+        <SideBarMenu
+          menu={customers}
+          menuTitle={'customers'}
+          render={customer => <SideBarMenuItem key={customer.pageTitle} item={customer} />}
+        />
+
+        <SideBarMenu
+          menu={businesses}
+          menuTitle={'businesses'}
+          render={business => <SideBarMenuItem key={business.pageTitle} item={business} />}
+        />
+
+        <SideBarMenu
+          menu={settings}
+          menuTitle={'settings'}
+          render={setting => <SideBarMenuItem key={setting.pageTitle} item={setting} />}
+        />
+      </nav>
+    </aside>
+  );
+}
+
+export default SideBar;
+
+{
+  /* <div className="">
           <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
             customers
           </h1>
@@ -90,9 +120,11 @@ function SideBar() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */
+}
 
-        <div>
+{
+  /* <div>
           <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
             businesses
           </h1>
@@ -111,9 +143,11 @@ function SideBar() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */
+}
 
-        <div>
+{
+  /*  <div>
           <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
             settings
           </h1>
@@ -132,10 +166,5 @@ function SideBar() {
               </li>
             ))}
           </ul>
-        </div>
-      </nav>
-    </aside>
-  );
+        </div> */
 }
-
-export default SideBar;
