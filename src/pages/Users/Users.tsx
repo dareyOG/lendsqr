@@ -1,5 +1,5 @@
-import Stat from '../ui/Stat';
-import Table from '../ui/Table';
+import Stat from '../../ui/Stat';
+import Table from '../../ui/Table';
 
 import { FaCoins, FaFileLines } from 'react-icons/fa6';
 import { HiOutlineUserGroup, HiOutlineUsers } from 'react-icons/hi2';

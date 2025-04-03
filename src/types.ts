@@ -1,29 +1,29 @@
 import { JSX, ReactNode } from 'react';
 
-export type SideBarMenuType<T> = {
+export type SideBarMenuPropType<T> = {
   menu: T[];
   menuTitle: string;
   render: (item: T) => ReactNode;
 };
 
-export type ItemType = {
+export type ItemPropType = {
   pageTitle: string;
   path: string;
   icon: JSX.Element;
 };
 
-export type StatType = {
+export type StatPropType = {
   icon: JSX.Element;
   title: string;
   stat: number;
   color: 'users' | 'activeUsers' | 'loans' | 'savings';
 };
 
-export type TableHeaderType = {
+export type TableHeaderPropType = {
   title: 'organization' | 'username' | 'email' | 'phone number' | 'date joined' | 'status' | '';
 };
 
-export type TableDataType = {
+export type TableDataPropType = {
   data: {
     organization: string;
     username: string;
@@ -33,3 +33,12 @@ export type TableDataType = {
     status: 'inactive' | 'pending' | 'active';
   }[];
 };
+
+export type ButtonPropType = {
+  title?: string;
+  icon?: JSX.Element;
+  handleClick: () => void;
+  style?: string;
+};
+
+export type UserDetailMenuProp = { menuTitle: string; path: string };

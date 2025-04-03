@@ -25,10 +25,10 @@ import { FaHome } from 'react-icons/fa';
 import { HiClipboardList } from 'react-icons/hi';
 import { HiAdjustmentsHorizontal, HiPercentBadge } from 'react-icons/hi2';
 
-import { ItemType } from '../types';
+import { ItemPropType } from '../types';
 
 function SideBar() {
-  const customers: ItemType[] = [
+  const customers: ItemPropType[] = [
     { pageTitle: 'Users', path: '/users', icon: <FaUserGroup /> },
     { pageTitle: 'Guarantors', path: '/guarantors', icon: <FaUsers /> },
     { pageTitle: 'Loans', path: '/loans', icon: <FaSackDollar /> },
@@ -39,7 +39,7 @@ function SideBar() {
     { pageTitle: 'Karma', path: '/karma', icon: <FaUserXmark /> }
   ];
 
-  const businesses: ItemType[] = [
+  const businesses: ItemPropType[] = [
     { pageTitle: 'Organization', path: '/organization', icon: <FaBriefcase /> },
     { pageTitle: 'Loan Products', path: '/loan-products', icon: <FaHandHoldingDollar /> },
     { pageTitle: 'Saving Products', path: '/saving-products', icon: <FaLandmark /> },
@@ -51,7 +51,7 @@ function SideBar() {
     { pageTitle: 'Reports', path: '/reports', icon: <FaChartColumn /> }
   ];
 
-  const settings: ItemType[] = [
+  const settings: ItemPropType[] = [
     { pageTitle: 'Preferences', path: '/preferences', icon: <HiAdjustmentsHorizontal /> },
     { pageTitle: 'Fees and Pricing', path: '/fees-and-pricing', icon: <HiPercentBadge /> },
     { pageTitle: 'Audit Logs', path: '/audit-logs', icon: <HiClipboardList /> }
@@ -68,7 +68,7 @@ function SideBar() {
 
       <nav className="py-[3rem] flex flex-col gap-y-[2.5rem] ">
         <Link
-          to="/"
+          to="/users"
           className="mx-[3rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
         >
           <FaHome />
@@ -98,72 +98,3 @@ function SideBar() {
 }
 
 export default SideBar;
-
-{
-  /* <div className="">
-          <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
-            customers
-          </h1>
-          <ul className="flex flex-col gap-[1.2rem] ">
-            {customers.map(customer => (
-              <li key={customer.path}>
-                <NavLink
-                  to={customer.path}
-                  className={
-                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]  hover:opacity-100 hover:bg-secondaryBg/20 text-secondaryText opacity-50'
-                  }
-                >
-                  {customer.icon}
-                  <span>{customer.pageTitle}</span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div> */
-}
-
-{
-  /* <div>
-          <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
-            businesses
-          </h1>
-          <ul className="flex flex-col gap-[1.2rem] ">
-            {businesses.map(business => (
-              <li key={business.path}>
-                <NavLink
-                  to={business.path}
-                  className={
-                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]  hover:opacity-100 hover:bg-secondaryBg/20 text-secondaryText opacity-50'
-                  }
-                >
-                  {business.icon}
-                  <span>{business.pageTitle}</span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div> */
-}
-
-{
-  /*  <div>
-          <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">
-            settings
-          </h1>
-          <ul className="flex flex-col gap-[1.2rem] ">
-            {settings.map(setting => (
-              <li key={setting.path}>
-                <NavLink
-                  to={setting.path}
-                  className={
-                    'border-l-4 border-l-transparent pl-[3rem] w-full flex items-center gap-[1.2rem]  hover:opacity-100 hover:bg-secondaryBg/20 text-secondaryText opacity-50'
-                  }
-                >
-                  {setting.icon}
-                  <span>{setting.pageTitle}</span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div> */
-}

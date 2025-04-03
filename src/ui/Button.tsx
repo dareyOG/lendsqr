@@ -1,11 +1,18 @@
-import { JSX } from 'react';
+import { ButtonPropType } from '../types';
 
-function Button({ icon }: { icon: JSX.Element }) {
-  return (
-    <button onClick={() => {}} className="cursor-pointer">
-      {icon}
-    </button>
-  );
+function Button({ title, icon, handleClick, style }: ButtonPropType) {
+  if (icon && !title)
+    return (
+      <button onClick={handleClick} className={`${style} cursor-pointer`}>
+        {icon}
+      </button>
+    );
+  if (!icon && title)
+    return (
+      <button onClick={handleClick} className={`${style} cursor-pointer`}>
+        {title}
+      </button>
+    );
 }
 
 export default Button;

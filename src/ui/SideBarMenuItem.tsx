@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import { ItemType } from '../types';
+import { ItemPropType } from '../types';
 
-function SideBarMenuItem({ item }: { item: ItemType }) {
+function SideBarMenuItem({ item }: { item: ItemPropType }) {
   return (
     <li>
       <NavLink
