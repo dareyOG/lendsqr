@@ -42,3 +42,11 @@ export type ButtonPropType = {
 };
 
 export type UserDetailMenuProp = { menuTitle: string; path: string };
+
+export type UserDetailHeaderPropType = {
+  user: string;
+  id: string;
+  amount: string;
+  accountNo: string;
+  bank: string;
+};

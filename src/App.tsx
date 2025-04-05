@@ -1,17 +1,16 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import Users from './pages/Users/Users';
+import UserDetails from './pages/Users/UserDetails';
 import PageNotFound from './pages/PageNotFound';
 
 import AppLayout from './ui/AppLayout';
-// import UserDetails from './pages/Users/UserDetails';
-import GeneralDetails from './pages/Users/GeneralDetails';
-import Documents from './pages/Users/Documents';
-import BankDetails from './pages/Users/BankDetails';
-import Loans from './pages/Users/Loans';
-import Savings from './pages/Users/Savings';
-import AppSystem from './pages/Users/AppSystem';
-import UserDetails from './pages/Users/UserDetails';
+import GeneralDetails from './ui/GeneralDetails';
+import Documents from './ui/Documents';
+import BankDetails from './ui/BankDetails';
+import Loans from './ui/Loans';
+import Savings from './ui/Savings';
+import AppSystem from './ui/AppSystem';
 
 function App() {
   return (

@@ -3,8 +3,8 @@ import { Link, Outlet } from 'react-router-dom';
 import Button from '../../ui/Button';
 
 import { HiArrowLongLeft } from 'react-icons/hi2';
-import { FaRegUser } from 'react-icons/fa6';
 import UserDetailMenu from './UserDetailMenu';
+import UserDetailHeader from '../../ui/UserDetailHeader';
 
 function UserDetails() {
   return (
@@ -32,25 +32,13 @@ function UserDetails() {
         </div>
       </div>
       <section className="border bg-primaryBg border-transparent flex flex-col gap-y-10">
-        <div className="flex items-center divide-x-[0.1rem] divide-secondaryText/20 [&_div]:px-10 pt-10">
-          <div className="flex items-center gap-x-[2rem]">
-            <span className="bg-primaryText/[16%] p-10 rounded-full text-primaryText">
-              <FaRegUser />
-            </span>
-            <span className="">
-              <p className="text-[2.2rem] font-medium">Grace Effiom</p>
-              <p className="text-[1.4rem] text-secondaryText">LSQFf587g90</p>
-            </span>
-          </div>
-          <div>
-            <p className="font-medium text-secondaryText text-[1.4rem]">User's Tier</p>
-            <div>star</div>
-          </div>
-          <div>
-            <p className="text-[2.2rem] font-medium">#200,000.00</p>
-            <p className="text-[1.2rem]">9912345678/Providus Bank</p>
-          </div>
-        </div>
+        <UserDetailHeader
+          user="Grace Effiom"
+          id="LSQFf587g90"
+          bank="providus bank"
+          accountNo="9912345678"
+          amount="200000"
+        />
         <div className="">
           <nav className="flex items-center justify-center">
             <ul className="font-user_details_tab flex items-center justify-center [&>:not(:last-child)]:capitalize gap-x-32">
@@ -64,9 +52,9 @@ function UserDetails() {
           </nav>
         </div>
       </section>
-      <section className="">
+      <>
         <Outlet />
-      </section>
+      </>
     </main>
   );
 }
