@@ -27,22 +27,24 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primaryText: #213f7d;
-  --color-secondaryText: #54557d;
+  /* text & background */
+  --color-primary: #213f7d;
+  --color-secondary: #54557d;
+  --color-accent: #39cdcc;
 
-  --color-primaryBg: #ffffff;
-  --color-secondaryBg: #39cdcc;
-
+  /* badge */
   --color-users: #df18ff;
   --color-activeUsers: #5718ff;
   --color-savings: #ff3366;
   --color-loans: #f55f44;
 
+  /* label */
   --color-pending: #e9b200;
   --color-active: #39cd62;
   --color-inactive: #545f7d;
   --color-blacklist: #e4033b;
 
+  /* font */
   --default-font-family: 'Work Sans', sans-serif;
   --font-login: 'Avenir Next lt', sans-serif;
   --font-user_details_tab: 'SF Compact Text', sans-serif;
@@ -53,9 +55,9 @@
 }
 
 body {
-  @apply text-[1.6rem] font-normal leading-[1.5] text-primaryText bg-primaryBg;
+  @apply text-[1.6rem] font-normal leading-[1.5] text-primary bg-white;
 }
 
 .active {
-  @apply border-l-secondaryBg bg-secondaryBg/30 text-secondaryText opacity-100;
+  @apply border-l-accent bg-accent/30 text-secondary opacity-100;
 }

@@ -14,7 +14,7 @@ function Header() {
         <SearchBar />
       </div>
 
-      <div className="flex items-center gap-x-[5rem] text-primaryText [&>*:not(:last-child)]:cursor-pointer">
+      <div className="flex items-center gap-x-[5rem] text-primary [&>*:not(:last-child)]:cursor-pointer">
         <Link to="/" className="underline">
           Docs
         </Link>

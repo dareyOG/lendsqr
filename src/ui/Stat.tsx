@@ -1,15 +1,18 @@
 import { StatPropType } from '../types';
 
-function Stat({ icon, title, stat, color = 'users' }: StatPropType) {
+function Stat({ icon, title, stat, color }: StatPropType) {
+  const colorVariants = {
+    users: 'text-users bg-users/20',
+    activeUsers: 'text-activeUsers bg-activeUsers/20',
+    savings: 'text-savings bg-savings/20',
+    loans: 'text-loans bg-loans/20'
+  };
+
   return (
-    <div className="flex flex-col justify-center  bg-primaryBg px-10 pt-5 pb-6 gap-y-3 rounded-md [&_span]:w-fit">
-      <span className={`border-transparent text-${color} bg-${color}/20 rounded-full p-4`}>
-        {icon}
-      </span>
-      <span className="text-secondaryText uppercase text-nowrap text-[1.4rem] font-medium">
-        {title}
-      </span>
-      <span className="font-semibold text-[2.4rem]">{stat}</span>
+    <div className="flex flex-col gap-4 bg-white p-[2rem] [&>*]:w-fit">
+      <div className={`border-transparent rounded-full p-4 ${colorVariants[color]}`}>{icon}</div>
+      <div className="text-secondary uppercase text-nowrap text-[1.4rem] font-medium">{title}</div>
+      <div className="font-semibold text-[2.4rem]">{stat}</div>
     </div>
   );
 }

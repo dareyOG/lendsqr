@@ -1,17 +1,17 @@
 import { Link, Outlet } from 'react-router-dom';
 
-import Button from '../../ui/Button';
-
-import { HiArrowLongLeft } from 'react-icons/hi2';
 import UserDetailMenu from './UserDetailMenu';
 import UserDetailHeader from '../../ui/UserDetailHeader';
+import ActionButton from '../../ui/ActionButton';
+
+import { HiArrowLongLeft } from 'react-icons/hi2';
 
 function UserDetails() {
   return (
     <main className="px-[3.5rem] py-[4.5rem] flex flex-col gap-y-9">
       <Link
         to={'/users'}
-        className="text-secondaryText opacity-50 hover:text-primaryText flex items-center gap-x-2 w-fit hover:opacity-100 duration-300 ease-in hover:[&>*:not(span)]:-translate-x-2 [&>*:not(span)]:transition-all [&>*:not(span)]:duration-300 [&>*:not(span)]:ease-in"
+        className="text-secondaryText opacity-50 hover:text-primary flex items-center gap-x-2 w-fit hover:opacity-100 duration-300 ease-in hover:[&>*:not(span)]:-translate-x-2 [&>*:not(span)]:transition-all [&>*:not(span)]:duration-300 [&>*:not(span)]:ease-in"
       >
         <HiArrowLongLeft />
         <span>Back to Users</span>
@@ -19,19 +19,11 @@ function UserDetails() {
       <div className="flex items-center justify-between">
         <h1 className="w-fit text-[2.4rem] font-medium">User Details</h1>
         <div className="flex gap-x-5">
-          <Button
-            title="blacklist user"
-            handleClick={() => {}}
-            style="border border-blacklist rounded-[0.8rem] px-[2rem] py-[0.5rem] text-blacklist uppercase text-[1.4rem] text-center tracking-[10%] font-semibold"
-          />
-          <Button
-            title="activate user"
-            handleClick={() => {}}
-            style="border border-secondaryBg rounded-[0.8rem] px-[2rem] py-[0.5rem] text-secondaryBg uppercase text-[1.4rem] text-center tracking-[10%] font-semibold"
-          />
+          <ActionButton title="blacklist user" variation="blacklist" />
+          <ActionButton title="activate user" variation="activate" />
         </div>
       </div>
-      <section className="border bg-primaryBg border-transparent flex flex-col gap-y-10">
+      <section className="border bg-white border-transparent flex flex-col gap-y-10">
         <UserDetailHeader
           user="Grace Effiom"
           id="LSQFf587g90"

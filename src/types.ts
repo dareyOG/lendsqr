@@ -41,6 +41,11 @@ export type ButtonPropType = {
   style?: string;
 };
 
+export type ActionButtonPropType = {
+  title: string;
+  variation: 'activate' | 'blacklist';
+};
+
 export type UserDetailMenuProp = { menuTitle: string; path: string };
 
 export type UserDetailHeaderPropType = {
@@ -49,4 +54,10 @@ export type UserDetailHeaderPropType = {
   amount: string;
   accountNo: string;
   bank: string;
+};
+
+export type SectionDetailPropType = {
+  sectionTitle: string;
+  children: ReactNode;
+  style?: string;
 };

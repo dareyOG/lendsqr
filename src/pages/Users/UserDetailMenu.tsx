@@ -8,8 +8,8 @@ function UserDetailMenu({ menuTitle, path }: UserDetailMenuProp) {
         to={path}
         className={({ isActive }: { isActive: boolean }) =>
           isActive
-            ? 'border-b-2 pb-1 border-secondaryBg text-nowrap text-secondaryBg'
-            : 'hover:text-secondaryBg text-nowrap'
+            ? 'border-b-2 pb-1 border-accent text-nowrap text-accent'
+            : 'hover:text-accent text-nowrap'
         }
       >
         {menuTitle}

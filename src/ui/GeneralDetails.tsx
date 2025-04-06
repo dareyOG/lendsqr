@@ -3,7 +3,7 @@ import SectionDetail from './SectionDetail';
 
 function GeneralDetails() {
   return (
-    <section className="border rounded-[0.4rem] border-primaryBg px-[2.5rem] bg-primaryBg divide-y-[0.1rem] divide-primaryText/10">
+    <section className="border rounded-[0.4rem] border-transparent px-[2.5rem] bg-white divide-y-[0.1rem] divide-primary/10">
       <SectionDetail sectionTitle="Personal Information">
         <DetailInfo title="full name" value={'Grace Effiom'} />
         <DetailInfo title="phone number" value={'07060780922'} />
