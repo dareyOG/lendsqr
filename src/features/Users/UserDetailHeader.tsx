@@ -1,5 +1,5 @@
 import { FaRegUser } from 'react-icons/fa6';
-import { UserDetailHeaderPropType } from '../types';
+import { UserDetailHeaderPropType } from '../../types';
 
 function UserDetailHeader({ user, id, amount, accountNo, bank }: UserDetailHeaderPropType) {
   return (

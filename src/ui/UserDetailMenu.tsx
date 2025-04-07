@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { UserDetailMenuProp } from '../../types';
+import { UserDetailMenuProp } from '../types';
 
 function UserDetailMenu({ menuTitle, path }: UserDetailMenuProp) {
   return (

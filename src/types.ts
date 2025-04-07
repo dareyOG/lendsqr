@@ -23,15 +23,52 @@ export type TableHeaderPropType = {
   title: 'organization' | 'username' | 'email' | 'phone number' | 'date joined' | 'status' | '';
 };
 
-export type TableDataPropType = {
-  data: {
-    organization: string;
-    username: string;
-    email: string;
-    phoneNumber: string | number;
-    dateJoined: string;
-    status: 'inactive' | 'pending' | 'active';
-  }[];
+type UserProfilePropType = {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  avatar: string;
+  gender: 'Male' | 'Female';
+  bvn: string;
+  address: string;
+  currency: string;
+};
+
+type UserGuarantorPropType = {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  gender: 'Male' | 'Female';
+  address: string;
+};
+
+type UserSocialsPropType = { facebook: string; instagram: string; twitter: string };
+
+type UserEductaionPropType = {
+  level: string;
+  employmentStatus: string;
+  sector: string;
+  duration: string;
+  officeEmail: string;
+  monthlyIncome: string[];
+  loanRepayment: string;
+};
+
+export type UserPropType = {
+  status: 'Blaclisted' | 'Inactive' | 'Pending' | 'Active';
+  createdAt: string;
+  orgName: string;
+  userName: string;
+  email: string;
+  phoneNumber: string;
+  lastActiveDate: string;
+  profile: UserProfilePropType;
+  guarantor: UserGuarantorPropType;
+  accountBalance: string;
+  accountNumber: string;
+  socials: UserSocialsPropType;
+  education: UserEductaionPropType;
+  id: string;
 };
 
 export type ButtonPropType = {

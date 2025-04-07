@@ -1,7 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 
-import UserDetailMenu from './UserDetailMenu';
-import UserDetailHeader from '../../ui/UserDetailHeader';
+import UserDetailMenu from '../../ui/UserDetailMenu';
+import UserDetailHeader from './UserDetailHeader';
 import ActionButton from '../../ui/ActionButton';
 
 import { HiArrowLongLeft } from 'react-icons/hi2';

@@ -1,5 +1,5 @@
-import DetailInfo from './DetailInfo';
-import SectionDetail from './SectionDetail';
+import DetailInfo from '../../ui/DetailInfo';
+import SectionDetail from '../../ui/SectionDetail';
 
 function GeneralDetails() {
   return (
