@@ -98,3 +98,26 @@ export type SectionDetailPropType = {
   children: ReactNode;
   style?: string;
 };
+
+export type UserCredentialsPropType = {
+  email: string;
+  password: string;
+};
+
+export type UserStatePropType = {
+  user: UserCredentialsPropType | null;
+  isAuthenticated: boolean;
+};
+
+export type AuthProviderPropType = {
+  children: ReactNode;
+};
+
+export type UserActionPropType = {
+  type: 'log_in' | 'log_out';
+  payload?: UserCredentialsPropType;
+};
+
+export type AuthContextPropType = UserStatePropType & {
+  dispatch: React.Dispatch<UserActionPropType>;
+};

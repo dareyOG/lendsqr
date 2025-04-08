@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 import SideBarMenu from './SideBarMenu';
 import SideBarMenuItem from './SideBarMenuItem';
 
 import {
+  FaArrowRightFromBracket,
   FaBriefcase,
   FaChartColumn,
   FaCoins,
@@ -21,11 +22,13 @@ import {
   FaUsers,
   FaUserXmark
 } from 'react-icons/fa6';
-import { FaHome } from 'react-icons/fa';
 import { HiClipboardList } from 'react-icons/hi';
 import { HiAdjustmentsHorizontal, HiPercentBadge } from 'react-icons/hi2';
+import { FaHome } from 'react-icons/fa';
+import { GiCarWheel } from 'react-icons/gi';
 
 import { ItemPropType } from '../types';
+import Button from './Button';
 
 function SideBar() {
   const customers: ItemPropType[] = [
@@ -54,7 +57,8 @@ function SideBar() {
   const settings: ItemPropType[] = [
     { pageTitle: 'Preferences', path: '/preferences', icon: <HiAdjustmentsHorizontal /> },
     { pageTitle: 'Fees and Pricing', path: '/fees-and-pricing', icon: <HiPercentBadge /> },
-    { pageTitle: 'Audit Logs', path: '/audit-logs', icon: <HiClipboardList /> }
+    { pageTitle: 'Audit Logs', path: '/audit-logs', icon: <HiClipboardList /> },
+    { pageTitle: 'Systems Messages', path: '/systems-messages', icon: <GiCarWheel /> }
   ];
 
   return (
@@ -62,14 +66,14 @@ function SideBar() {
       <div className=" text-secondaryText mx-[3rem] flex items-center gap-[1.2rem]">
         <FaBriefcase />
         <select name="organization" className="capitalize outline-0">
-          <option value={''}>switch organization</option>
+          <option value={'switch-organization'}>switch organization</option>
         </select>
       </div>
 
       <nav className="py-[3rem] flex flex-col gap-y-[2.5rem] ">
         <Link
           to="/users"
-          className="mx-[3rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
+          className="ml-[3rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
         >
           <FaHome />
           <span>Dashboard</span>
@@ -91,6 +95,25 @@ function SideBar() {
           menu={settings}
           menuTitle={'settings'}
           render={setting => <SideBarMenuItem key={setting.pageTitle} item={setting} />}
+        />
+
+        {/* <Link
+          to="/login"
+          className="ml-[3rem] mt-[4rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
+        >
+          <FaArrowRightFromBracket />
+          <span>Logout</span>
+        </Link> */}
+        <Button
+          title="logout"
+          icon={<FaArrowRightFromBracket />}
+          handleClick={() => {
+            // Handle logout logic here
+            // For example, clear user session, redirect to login page, etc.
+
+            redirect('/login');
+          }}
+          style="ml-[3rem] mt-[4rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
         />
       </nav>
     </aside>

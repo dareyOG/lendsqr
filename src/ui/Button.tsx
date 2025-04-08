@@ -13,6 +13,12 @@ function Button({ title, icon, handleClick, style }: ButtonPropType) {
         {title}
       </button>
     );
+  return (
+    <button onClick={handleClick} className={`${style} cursor-pointer`}>
+      {icon}
+      <span>{title}</span>
+    </button>
+  );
 }
 
 export default Button;
