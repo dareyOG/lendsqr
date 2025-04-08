@@ -1,7 +1,8 @@
-import { Link, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import SideBarMenu from './SideBarMenu';
 import SideBarMenuItem from './SideBarMenuItem';
+import Button from './Button';
 
 import {
   FaArrowRightFromBracket,
@@ -28,7 +29,7 @@ import { FaHome } from 'react-icons/fa';
 import { GiCarWheel } from 'react-icons/gi';
 
 import { ItemPropType } from '../types';
-import Button from './Button';
+import LogOut from '../features/Authentication/LogOut';
 
 function SideBar() {
   const customers: ItemPropType[] = [
@@ -97,24 +98,7 @@ function SideBar() {
           render={setting => <SideBarMenuItem key={setting.pageTitle} item={setting} />}
         />
 
-        {/* <Link
-          to="/login"
-          className="ml-[3rem] mt-[4rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
-        >
-          <FaArrowRightFromBracket />
-          <span>Logout</span>
-        </Link> */}
-        <Button
-          title="logout"
-          icon={<FaArrowRightFromBracket />}
-          handleClick={() => {
-            // Handle logout logic here
-            // For example, clear user session, redirect to login page, etc.
-
-            redirect('/login');
-          }}
-          style="ml-[3rem] mt-[4rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
-        />
+        <LogOut />
       </nav>
     </aside>
   );

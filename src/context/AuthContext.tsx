@@ -1,8 +1,10 @@
-import { createContext, useReducer } from 'react';
+import { createContext, ReactNode, useReducer } from 'react';
+import { redirect } from 'react-router-dom';
+
 import {
   AuthContextPropType,
-  AuthProviderPropType,
   UserActionPropType,
+  UserCredentialsPropType,
   UserStatePropType
 } from '../types';
 
@@ -30,11 +32,28 @@ function authReducer(state: UserStatePropType, action: UserActionPropType): User
   }
 }
 
-function AuthContextProvider({ children }: AuthProviderPropType) {
+function AuthContextProvider({ children }: { children: ReactNode }) {
   const [{ user, isAuthenticated }, dispatch] = useReducer(authReducer, initialState);
 
+  const handleLogin = (user: { user: UserCredentialsPropType }) => {
+    if (user && user.user) {
+      dispatch({
+        type: 'log_in',
+        payload: { email: user.user.email, password: user.user.password }
+      });
+      redirect('/users');
+    }
+  };
+
+  const handleLogout = () => {
+    dispatch({ type: 'log_out' });
+    // Clear user data from local storage or any other storage mechanism
+    localStorage.removeItem('user');
+    redirect('/login');
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, dispatch }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, handleLogin, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );

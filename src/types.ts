@@ -102,15 +102,11 @@ export type SectionDetailPropType = {
 export type UserCredentialsPropType = {
   email: string;
   password: string;
-};
+} | null;
 
 export type UserStatePropType = {
-  user: UserCredentialsPropType | null;
+  user: UserCredentialsPropType;
   isAuthenticated: boolean;
-};
-
-export type AuthProviderPropType = {
-  children: ReactNode;
 };
 
 export type UserActionPropType = {
@@ -119,5 +115,6 @@ export type UserActionPropType = {
 };
 
 export type AuthContextPropType = UserStatePropType & {
-  dispatch: React.Dispatch<UserActionPropType>;
+  handleLogout: () => void;
+  handleLogin: (user: { user: UserCredentialsPropType }) => void;
 };

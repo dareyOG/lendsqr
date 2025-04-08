@@ -1,9 +1,11 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
+import { AuthContextProvider } from './context/AuthContext';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import LogIn from './pages/LogIn';
+import Login from './pages/LogIn';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
 
@@ -28,9 +30,11 @@ function App() {
         <Routes>
           <Route
             element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
+              <AuthContextProvider>
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              </AuthContextProvider>
             }
           >
             <Route path="dashboard" element={<Users />} />
@@ -66,7 +70,7 @@ function App() {
             <Route path="audit-logs" element={<Users />} />
             <Route path="systems-messages" element={<Users />} />
           </Route>
-          <Route path="login" element={<LogIn />} />
+          <Route path="login" element={<Login />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
