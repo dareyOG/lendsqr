@@ -1,16 +1,25 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuth } from '../features/Authentication/useAuth';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  // const isAuthenticated = auth?.isAuthenticated;
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) navigate('/login');
-  // }, [isAuthenticated]);
+  useEffect(() => {
+    const handleStorageChange = () => {
+      if (!localStorage.getItem('token') && !isAuthenticated) {
+        navigate('/login');
+      }
+    };
 
-  // If the user is authenticated, render the protected component
-  // You can also use a router to navigate to the desired route
-  // instead of using window.location.href
-  // return <Navigate to="/users" replace />;
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [isAuthenticated, navigate]);
+
   return children;
 }
 

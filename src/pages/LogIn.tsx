@@ -3,17 +3,17 @@ import LoginForm from '../features/Authentication/LoginForm';
 function Login() {
   return (
     <main className="grid grid-cols-2">
-      <div className="m-20">
+      <section className="m-20">
         <div className="ml-10 w-fit ">
           <img src="/img/logo.svg" />
         </div>
         <div className="mt-36">
           <img src="/img/pablo-sign-in.svg" />
         </div>
-      </div>
-      <div className="place-self-center">
+      </section>
+      <section className="place-self-center">
         <LoginForm />
-      </div>
+      </section>
     </main>
   );
 }

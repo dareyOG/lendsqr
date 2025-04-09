@@ -58,6 +58,10 @@ body {
   @apply text-[1.6rem] font-normal leading-[1.5] text-primary bg-white;
 }
 
+form {
+  @apply font-login;
+}
+
 .active {
   @apply border-l-accent bg-accent/30 text-secondary opacity-100;
 }

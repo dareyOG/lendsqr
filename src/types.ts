@@ -102,10 +102,10 @@ export type SectionDetailPropType = {
 export type UserCredentialsPropType = {
   email: string;
   password: string;
-} | null;
+};
 
 export type UserStatePropType = {
-  user: UserCredentialsPropType;
+  user: UserCredentialsPropType | null;
   isAuthenticated: boolean;
 };
 
@@ -116,5 +116,5 @@ export type UserActionPropType = {
 
 export type AuthContextPropType = UserStatePropType & {
   handleLogout: () => void;
-  handleLogin: (user: { user: UserCredentialsPropType }) => void;
+  handleLogin: (currUser: { currUser: UserCredentialsPropType }) => void;
 };
