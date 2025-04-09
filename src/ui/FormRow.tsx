@@ -16,7 +16,7 @@ function FormRow({
       {children}
       <label
         htmlFor={type}
-        className="w-fit px-2 absolute top-5 left-5 text-[1.4rem] text-secondary/60 bg-white border border-transparent peer-focus:top-[-20%] peer-focus:text-primary peer-focus:font-semibold peer-not-placeholder-shown:top-[-20%]"
+        className="w-fit px-2 absolute top-5 left-5 text-[1.4rem] text-secondary/60 bg-white border border-transparent peer-focus:top-[-20%] peer-focus:text-primary peer-focus:font-semibold peer-not-placeholder-shown:top-[-20%] transition-all duration-500 ease-in"
       >
         {label}
       </label>

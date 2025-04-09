@@ -4,8 +4,10 @@ import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import { useAuth } from './useAuth';
 import { UserCredentialsPropType } from '../../types';
+import { useState } from 'react';
 
 function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -29,6 +31,7 @@ function LoginForm() {
           <input
             type="email"
             id="email"
+            autoComplete="email"
             {...register('email', {
               required: 'This field is required',
               pattern: {
@@ -37,22 +40,36 @@ function LoginForm() {
               }
             })}
             placeholder=""
-            className="peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] text-secondary invalid:text-blacklist focus:text-accent focus:outline-accent"
+            className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent ${
+              errors.email ? 'text-blacklist' : 'text-accent focus:text-secondary'
+            }`}
           />
         </FormRow>
 
         <FormRow label="Password" type="password" errorMessage={errors?.password?.message ?? ''}>
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             id="password"
+            autoComplete="current-password"
             {...register('password', {
               required: 'This field is required',
               minLength: { value: 6, message: 'ogbeni, your password nor make👎' },
-              maxLength: { value: 8, message: 'Calm down😒, 8 characters are enough' }
+              maxLength: { value: 8, message: 'Calm down😒, 8 characters don do' }
             })}
             placeholder=""
-            className="peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] text-secondary invalid:text-blacklist focus:text-accent focus:outline-accent"
+            className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent ${
+              errors.password ? 'text-blacklist' : 'text-accent focus:text-secondary'
+            }`}
           />
+          <span
+            role="button"
+            onClick={() => {
+              setShowPassword(show => !show);
+            }}
+            className="absolute uppercase text-[1.2rem] font-semibold text-accent top-[35%] right-[3%] cursor-pointer"
+          >
+            {showPassword ? 'hide' : 'show'}
+          </span>
         </FormRow>
 
         <div
@@ -61,7 +78,7 @@ function LoginForm() {
         >
           Forgot password?
         </div>
-        <button className="bg-accent w-full px-5 py-3 rounded-[0.8rem] uppercase text-[1.4rem] text-white font-semibold hover:bg-accent/50 cursor-pointer">
+        <button className="bg-accent w-full p-5 rounded-[0.8rem] uppercase text-[1.4rem] text-white font-semibold hover:bg-accent/50 cursor-pointer">
           {isSubmitting ? 'Logging in' : 'log in'}
         </button>
       </Form>
