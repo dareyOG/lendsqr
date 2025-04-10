@@ -2,10 +2,8 @@ import { Link } from 'react-router-dom';
 
 import SideBarMenu from './SideBarMenu';
 import SideBarMenuItem from './SideBarMenuItem';
-import Button from './Button';
 
 import {
-  FaArrowRightFromBracket,
   FaBriefcase,
   FaChartColumn,
   FaCoins,

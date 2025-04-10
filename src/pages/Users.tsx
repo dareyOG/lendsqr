@@ -1,18 +1,16 @@
-// import UsersTable from '../features/Users/UsersTable';
-
 import Stat from '../ui/Stat';
+import Table from '../ui/Table';
+import TableHeader from '../ui/TableHeader';
+import TableBody from '../ui/TableBody';
 
 import { FaCoins, FaFileLines } from 'react-icons/fa6';
 import { HiOutlineUserGroup, HiOutlineUsers } from 'react-icons/hi2';
-import Button from '../ui/Button';
-import { FaEllipsisV } from 'react-icons/fa';
-import { LuListFilter } from 'react-icons/lu';
 
 function Users() {
   return (
     <main className="px-[3.5rem] py-[4.5rem] flex flex-col gap-y-9">
       <h1 className="w-fit text-[2.4rem] font-medium">Users</h1>
-      <div className="grid grid-cols-4 gap-[2.3rem]">
+      <section className="grid grid-cols-4 gap-[2.3rem]">
         <Stat stat={2453} icon={<HiOutlineUsers />} title="users" color={'users'} />
         <Stat
           stat={2453}
@@ -22,11 +20,21 @@ function Users() {
         />
         <Stat stat={12453} icon={<FaFileLines />} title="users with loans" color={'loans'} />
         <Stat stat={102453} icon={<FaCoins />} title="users with savings" color={'loans'} />
-      </div>
-      {/* <UsersTable /> */}
-      <div className="bg-white p-10">
-        <table className="table-auto w-full border-spacing-5">
-          <thead className="text-[1.2rem]">
+      </section>
+      <section className="bg-white p-10">
+        <Table>
+          <TableHeader />
+          <TableBody />
+        </Table>
+      </section>
+    </main>
+  );
+}
+
+export default Users;
+
+{
+  /* <thead className="text-[1.2rem]">
             <tr className="text-nowrap uppercase [&_th]:text-start">
               <th>
                 <div className="flex items-center gap-x-3">
@@ -66,8 +74,10 @@ function Users() {
               </th>
               <th></th>
             </tr>
-          </thead>
-          <tbody className="text-[1.4rem] divide-y-[0.1rem] [&_tr]:text-nowrap [&_td]:py-5 divide-primary/10">
+          </thead> */
+}
+{
+  /*   <tbody className="text-[1.4rem] divide-y-[0.1rem] [&_tr]:text-nowrap [&_td]:py-5 divide-primary/10">
             <tr>
               <td>Apple Inc.</td>
               <td>Damilare Oludire</td>
@@ -181,11 +191,5 @@ function Users() {
                 <Button icon={<FaEllipsisV />} handleClick={() => {}} style="text-[1rem]" />
               </td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-  );
+          </tbody> */
 }
-
-export default Users;

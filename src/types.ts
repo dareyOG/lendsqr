@@ -19,10 +19,6 @@ export type StatPropType = {
   color: 'users' | 'activeUsers' | 'loans' | 'savings';
 };
 
-export type TableHeaderPropType = {
-  title: 'organization' | 'username' | 'email' | 'phone number' | 'date joined' | 'status' | '';
-};
-
 type UserProfilePropType = {
   firstName: string;
   lastName: string;

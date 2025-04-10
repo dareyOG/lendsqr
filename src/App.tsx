@@ -5,7 +5,7 @@ import AuthContextProvider from './context/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import Login from './pages/Login';
+import Login from './pages/LogIn';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
 

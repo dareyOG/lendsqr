@@ -9,7 +9,12 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      if (!localStorage.getItem('token') && !isAuthenticated) {
+      if (
+        !localStorage.getItem('token') ||
+        !isAuthenticated ||
+        (!localStorage.getItem('token') && !isAuthenticated)
+      ) {
+        // If the token is removed or the user is not authenticated, redirect to login
         navigate('/login');
       }
     };
@@ -18,7 +23,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, [isAuthenticated, navigate]);
+  }, [navigate, isAuthenticated]);
 
   return children;
 }

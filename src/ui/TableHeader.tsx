@@ -1,18 +1,10 @@
-import Button from './Button';
+import TableHeadRow from './TableHeadRow';
 
-import { TableHeaderPropType } from '../types';
-import { LuListFilter } from 'react-icons/lu';
-
-function TableHeader({ title }: TableHeaderPropType) {
+function TableHeader() {
   return (
-    <th className="flex items-center text-nowrap gap-x-5 w-[10rem]">
-      <div>{title}</div>
-      {title === '' ? null : (
-        <>
-          <Button icon={<LuListFilter />} handleClick={() => {}} />
-        </>
-      )}
-    </th>
+    <thead className="text-[1.2rem]">
+      <TableHeadRow />
+    </thead>
   );
 }
 
