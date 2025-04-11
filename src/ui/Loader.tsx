@@ -1,13 +1,19 @@
 import { OrbitProgress } from 'react-loading-indicators';
 
-function Loader() {
+function Loader({
+  text = 'fetching',
+  variant
+}: {
+  text?: string;
+  variant: 'disc' | 'dotted' | 'split-disc' | 'spokes' | 'track-disc';
+}) {
   return (
     <OrbitProgress
-      variant="split-disc"
+      variant={variant}
       color=" #39cdcc"
-      size="small"
-      text="fetching"
-      textColor=""
+      size="medium"
+      text={text}
+      textColor=" #213f7d"
     />
   );
 }

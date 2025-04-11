@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-function TableBodyRow({ children }: { children: ReactNode }) {
-  return <tr>{children}</tr>;
+function TableBodyRow({ key, children }: { key: string; children: ReactNode }) {
+  return <tr key={key}>{children}</tr>;
 }
 
 export default TableBodyRow;

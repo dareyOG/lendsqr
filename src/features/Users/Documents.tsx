@@ -1,5 +1,7 @@
+import UserDetailsLoader from '../../ui/UserDetailsLoader';
+
 function Documents() {
-  return <div>documents</div>;
+  return <UserDetailsLoader title="documents" />;
 }
 
 export default Documents;

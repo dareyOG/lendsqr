@@ -1,6 +1,6 @@
-import { ItemPropType, SideBarMenuPropType } from '../types';
+import { MenuPropType, SideBarMenuPropType } from '../types';
 
-function SideBarMenu({ menu, menuTitle, render }: SideBarMenuPropType<ItemPropType>) {
+function SideBarMenu({ menu, menuTitle, render }: SideBarMenuPropType<MenuPropType>) {
   return (
     <div>
       <h1 className="uppercase text-[1.2rem] mb-[0.5rem] pl-[3rem] text-secondaryText opacity-50">

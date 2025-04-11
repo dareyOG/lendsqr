@@ -1,12 +1,22 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 import UserDetailMenu from '../../ui/UserDetailMenu';
-import UserDetailHeader from './UserDetailHeader';
+import UserDetailHeader from './UserDetailsHeader';
 import ActionButton from '../../ui/ActionButton';
 
 import { HiArrowLongLeft } from 'react-icons/hi2';
+import UserDetailsContent from '../../ui/UserDetailsContent';
+import UserDetailsHeader from '../../ui/UserDetailsSummary';
 
 function UserDetails() {
+  const { userId } = useParams();
+
+  console.log(userId);
+
+  const status = 'active';
+
+  // fetch user based on id
+
   return (
     <main className="px-[3.5rem] py-[4.5rem] flex flex-col gap-y-9">
       <Link
@@ -18,12 +28,17 @@ function UserDetails() {
       </Link>
       <div className="flex items-center justify-between">
         <h1 className="w-fit text-[2.4rem] font-medium">User Details</h1>
+
         <div className="flex gap-x-5">
-          <ActionButton title="blacklist user" variation="blacklist" />
-          <ActionButton title="activate user" variation="activate" />
+          <ActionButton
+            title="blacklist user"
+            disabled={status === 'active'}
+            variation="blacklist"
+          />
+          <ActionButton title="activate user" disabled={status === 'active'} variation="activate" />
         </div>
       </div>
-      <section className="border bg-white border-transparent flex flex-col gap-y-10">
+      <UserDetailsHeader>
         <UserDetailHeader
           user="Grace Effiom"
           id="LSQFf587g90"
@@ -31,7 +46,7 @@ function UserDetails() {
           accountNo="9912345678"
           amount="200000"
         />
-        <div className="">
+        <>
           <nav className="flex items-center justify-center">
             <ul className="font-user_details_tab flex items-center justify-center [&>:not(:last-child)]:capitalize gap-x-32">
               <UserDetailMenu menuTitle="general details" path="general-details" />
@@ -42,11 +57,12 @@ function UserDetails() {
               <UserDetailMenu menuTitle="App and System" path="app-and-system" />
             </ul>
           </nav>
-        </div>
-      </section>
-      <>
+        </>
+      </UserDetailsHeader>
+
+      <UserDetailsContent>
         <Outlet />
-      </>
+      </UserDetailsContent>
     </main>
   );
 }

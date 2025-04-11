@@ -1,5 +1,7 @@
+import UserDetailsLoader from '../../ui/UserDetailsLoader';
+
 function AppSystem() {
-  return <div>App and System</div>;
+  return <UserDetailsLoader title="App & System" />;
 }
 
 export default AppSystem;

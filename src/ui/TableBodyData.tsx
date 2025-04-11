@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-function TableData({ children }: { children: ReactNode }) {
-  return <td>{children}</td>;
+function TableData({ className, children }: { className?: string; children: ReactNode }) {
+  return <td className={className}>{children}</td>;
 }
 
 export default TableData;

@@ -12,6 +12,7 @@ import {
 export const AuthContext = createContext<AuthContextPropType>({
   user: null,
   isAuthenticated: false,
+  username: null,
   handleLogin: () => {},
   handleLogout: () => {}
 });
@@ -42,18 +43,21 @@ export default function AuthContextProvider({ children }: { children: ReactNode 
   const [{ user, isAuthenticated }, dispatch] = useReducer(authReducer, initialState);
   const navigate = useNavigate();
 
-  const handleLogin = (currUser: { currUser: UserCredentialsPropType }) => {
+  const handleLogin = (currUser: UserCredentialsPropType) => {
     dispatch({
       type: 'log_in',
-      payload: { email: currUser.currUser.email, password: currUser.currUser.password }
+      payload: { email: currUser.email, password: currUser.password }
     });
 
-    const token = btoa(
-      encodeURIComponent(`${currUser.currUser.email}:${currUser.currUser.password}`)
-    );
+    const token = btoa(encodeURIComponent(`${currUser.email}:${currUser.password}`));
     localStorage.setItem('token', token);
     navigate('/users', { replace: true });
   };
+
+  // extract username
+  const username = localStorage.getItem('token')
+    ? atob(localStorage.getItem('token') || '').split(/@|_|(?=\d)|(?=[A-Z])/)[0]
+    : null;
 
   const handleLogout = () => {
     dispatch({ type: 'log_out' });
@@ -62,7 +66,7 @@ export default function AuthContextProvider({ children }: { children: ReactNode 
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, handleLogin, handleLogout }}>
+    <AuthContext.Provider value={{ user, username, isAuthenticated, handleLogin, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );

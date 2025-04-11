@@ -1,15 +1,15 @@
 import { JSX, ReactNode } from 'react';
 
+export type MenuPropType = {
+  pageTitle: string;
+  path: string;
+  icon: JSX.Element;
+};
+
 export type SideBarMenuPropType<T> = {
   menu: T[];
   menuTitle: string;
   render: (item: T) => ReactNode;
-};
-
-export type ItemPropType = {
-  pageTitle: string;
-  path: string;
-  icon: JSX.Element;
 };
 
 export type StatPropType = {
@@ -19,12 +19,24 @@ export type StatPropType = {
   color: 'users' | 'activeUsers' | 'loans' | 'savings';
 };
 
+enum Gender {
+  Male = 'Male',
+  Female = 'Female'
+}
+
+enum Status {
+  Active = 'active',
+  Inactive = 'inactive',
+  Blacklisted = 'blacklisted',
+  Pending = 'pending'
+}
+
 type UserProfilePropType = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
   avatar: string;
-  gender: 'Male' | 'Female';
+  gender: Gender;
   bvn: string;
   address: string;
   currency: string;
@@ -34,7 +46,7 @@ type UserGuarantorPropType = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  gender: 'Male' | 'Female';
+  gender: Gender;
   address: string;
 };
 
@@ -50,38 +62,38 @@ type UserEductaionPropType = {
   loanRepayment: string;
 };
 
-export type UserPropType = {
-  status: 'Blaclisted' | 'Inactive' | 'Pending' | 'Active';
-  createdAt: string;
-  orgName: string;
+export type UsersPropType = {
+  id: string;
   userName: string;
   email: string;
   phoneNumber: string;
+  createdAt: string;
   lastActiveDate: string;
-  profile: UserProfilePropType;
-  guarantor: UserGuarantorPropType;
+  orgName: string;
   accountBalance: string;
   accountNumber: string;
-  socials: UserSocialsPropType;
+  status: Status;
   education: UserEductaionPropType;
-  id: string;
+  guarantor: UserGuarantorPropType;
+  profile: UserProfilePropType;
+  socials: UserSocialsPropType;
 };
 
 export type ButtonPropType = {
   title?: string;
   icon?: JSX.Element;
-  handleClick: () => void;
+  disabled: boolean;
+  handleClick?: () => void;
   style?: string;
 };
 
-export type ActionButtonPropType = {
-  title: string;
+export type ActionButtonPropType = ButtonPropType & {
   variation: 'activate' | 'blacklist';
 };
 
 export type UserDetailMenuProp = { menuTitle: string; path: string };
 
-export type UserDetailHeaderPropType = {
+export type UserDetailsHeaderPropType = {
   user: string;
   id: string;
   amount: string;
@@ -89,7 +101,7 @@ export type UserDetailHeaderPropType = {
   bank: string;
 };
 
-export type SectionDetailPropType = {
+export type SectionDetailsPropType = {
   sectionTitle: string;
   children: ReactNode;
   style?: string;
@@ -111,6 +123,7 @@ export type UserActionPropType = {
 };
 
 export type AuthContextPropType = UserStatePropType & {
+  username: string | null;
   handleLogout: () => void;
-  handleLogin: (currUser: { currUser: UserCredentialsPropType }) => void;
+  handleLogin: (currUser: UserCredentialsPropType) => void;
 };

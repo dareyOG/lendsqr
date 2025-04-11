@@ -1,5 +1,7 @@
+import UserDetailsLoader from '../../ui/UserDetailsLoader';
+
 function BankDetails() {
-  return <div>bank details</div>;
+  return <UserDetailsLoader title="bank details" />;
 }
 
 export default BankDetails;

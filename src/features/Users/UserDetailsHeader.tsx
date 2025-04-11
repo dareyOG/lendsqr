@@ -1,9 +1,12 @@
 import { FaRegUser } from 'react-icons/fa6';
-import { UserDetailHeaderPropType } from '../../types';
+import { UserDetailsHeaderPropType } from '../../types';
 
-function UserDetailHeader({ user, id, amount, accountNo, bank }: UserDetailHeaderPropType) {
+function UserDetailsHeader({ user, id, amount, accountNo, bank }: UserDetailsHeaderPropType) {
   return (
-    <div className="flex items-center divide-x-[0.1rem] divide-secondary/20 [&_div]:px-10 pt-10">
+    <div
+      role="banner"
+      className="flex items-center divide-x-[0.1rem] divide-secondary/20 [&_div]:px-10 pt-10"
+    >
       <div className="flex items-center gap-x-[2rem]">
         <span className="bg-primary/[16%] p-10 rounded-full text-primary">
           <FaRegUser />
@@ -27,4 +30,4 @@ function UserDetailHeader({ user, id, amount, accountNo, bank }: UserDetailHeade
   );
 }
 
-export default UserDetailHeader;
+export default UserDetailsHeader;

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import LogOut from '../features/Authentication/LogOut';
 
 import SideBarMenu from './SideBarMenu';
 import SideBarMenuItem from './SideBarMenuItem';
@@ -26,11 +26,14 @@ import { HiAdjustmentsHorizontal, HiPercentBadge } from 'react-icons/hi2';
 import { FaHome } from 'react-icons/fa';
 import { GiCarWheel } from 'react-icons/gi';
 
-import { ItemPropType } from '../types';
-import LogOut from '../features/Authentication/LogOut';
+import { MenuPropType } from '../types';
 
 function SideBar() {
-  const customers: ItemPropType[] = [
+  const dashboard: MenuPropType[] = [
+    { pageTitle: 'Dashboard', path: '/dashboard', icon: <FaHome /> }
+  ];
+
+  const customers: MenuPropType[] = [
     { pageTitle: 'Users', path: '/users', icon: <FaUserGroup /> },
     { pageTitle: 'Guarantors', path: '/guarantors', icon: <FaUsers /> },
     { pageTitle: 'Loans', path: '/loans', icon: <FaSackDollar /> },
@@ -41,7 +44,7 @@ function SideBar() {
     { pageTitle: 'Karma', path: '/karma', icon: <FaUserXmark /> }
   ];
 
-  const businesses: ItemPropType[] = [
+  const businesses: MenuPropType[] = [
     { pageTitle: 'Organization', path: '/organization', icon: <FaBriefcase /> },
     { pageTitle: 'Loan Products', path: '/loan-products', icon: <FaHandHoldingDollar /> },
     { pageTitle: 'Saving Products', path: '/saving-products', icon: <FaLandmark /> },
@@ -53,7 +56,7 @@ function SideBar() {
     { pageTitle: 'Reports', path: '/reports', icon: <FaChartColumn /> }
   ];
 
-  const settings: ItemPropType[] = [
+  const settings: MenuPropType[] = [
     { pageTitle: 'Preferences', path: '/preferences', icon: <HiAdjustmentsHorizontal /> },
     { pageTitle: 'Fees and Pricing', path: '/fees-and-pricing', icon: <HiPercentBadge /> },
     { pageTitle: 'Audit Logs', path: '/audit-logs', icon: <HiClipboardList /> },
@@ -70,13 +73,11 @@ function SideBar() {
       </div>
 
       <nav className="py-[3rem] flex flex-col gap-y-[2.5rem] ">
-        <Link
-          to="/users"
-          className="ml-[3rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
-        >
-          <FaHome />
-          <span>Dashboard</span>
-        </Link>
+        <SideBarMenu
+          menu={dashboard}
+          menuTitle=""
+          render={dashboard => <SideBarMenuItem key={dashboard.pageTitle} item={dashboard} />}
+        />
 
         <SideBarMenu
           menu={customers}
