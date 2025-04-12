@@ -1,35 +1,32 @@
-import { useNavigate, useParams } from 'react-router-dom';
-
-import ModalItem from './ModalList';
-
 import { FaRegEye, FaUserCheck, FaUserXmark } from 'react-icons/fa6';
+import ModalItem from './ModalItem';
+import { useNavigate } from 'react-router-dom';
+import { useUsers } from '../features/Users/useUsers';
+import { UsersPropType } from '../types';
 
-function Modal() {
+function Modal({ id }: { id: string }) {
   const navigate = useNavigate();
-  // const x = useParams();
-  // console.log(x);
+  const { users } = useUsers();
 
-  const userId = '12345'; // Replace with actual user ID
-  // This should be passed as a prop or obtained from context
+  const clickedUser = users?.find((user: UsersPropType) => user.id === id);
 
   const handleBlacklist = () => {};
   const handleActivate = () => {};
 
+  // flex absolute top-0 -right-[10%] bg-white shadow-lg p-4  flex-col gap-y-4 border border-transparent drop-shadow-xl w-fit rounded-[0.5rem] z-50
   return (
-    <div
+    <ul
       role="dialog"
-      className="border border-transparent drop-shadow-xl w-fit rounded-[0.5rem] bg-white p-6"
+      className="flex flex-col gap-3 z-10 absolute top-16 -right-20 bg-white border border-transparent drop-shadow-xl p-6 rounded-md"
     >
-      <ul className="flex flex-col gap-y-4">
-        <ModalItem
-          icon={<FaRegEye />}
-          item="view details"
-          handleClick={() => navigate(`/users/${userId}`)}
-        />
-        <ModalItem icon={<FaUserXmark />} item="blacklist user" handleClick={handleBlacklist} />
-        <ModalItem icon={<FaUserCheck />} item="activate user" handleClick={handleActivate} />
-      </ul>
-    </div>
+      <ModalItem
+        icon={<FaRegEye />}
+        item="view details"
+        handleClick={() => navigate(`/users/${clickedUser.userName}`)}
+      />
+      <ModalItem icon={<FaUserXmark />} item="blacklist user" handleClick={handleBlacklist} />
+      <ModalItem icon={<FaUserCheck />} item="activate user" handleClick={handleActivate} />
+    </ul>
   );
 }
 

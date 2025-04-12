@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-function TableBodyRow({ key, children }: { key: string; children: ReactNode }) {
-  return <tr key={key}>{children}</tr>;
+function TableBodyRow({ children }: { children: ReactNode }) {
+  return <tr className="gap-5">{children}</tr>;
 }
 
 export default TableBodyRow;

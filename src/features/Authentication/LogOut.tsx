@@ -11,7 +11,7 @@ function LogOut() {
       title="logout"
       icon={<FaArrowRightFromBracket />}
       handleClick={handleLogout}
-      style="ml-[3rem] mt-[4rem] w-fit flex items-center gap-[1.2rem] text-secondaryText opacity-50  hover:opacity-100"
+      className="ml-[3rem] capitalize mt-[4rem] w-fit flex items-center gap-[1.2rem] text-secondaryText hover:opacity-50"
     />
   );
 }

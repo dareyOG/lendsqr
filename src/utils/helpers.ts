@@ -1,3 +1,16 @@
+export function getStatus() {
+  let status: unknown;
+  const statusArr = ['active', 'inactive', 'pending', 'blacklisted'];
+
+  const statusIndex = Math.floor(Math.random() * statusArr.length);
+
+  statusArr.forEach((stat, index) => {
+    if (statusIndex === index) status = stat;
+  });
+
+  return status;
+}
+
 export function formatText(org: string) {
   return org.slice(0, 10).split('-');
 }
@@ -12,8 +25,8 @@ export function formatEmail(email: string) {
 
 export function formatPhoneNumber(phone: string) {
   return phone
-    .replace(/[ \-x().]/g, '')
-    .substring(phone.length <= 10 ? 7 : 8, -1)
+    ?.replace(/[ \-x().]/g, '')
+    ?.substring(phone.length <= 10 ? 7 : 8, -1)
     .padStart(11, '070');
 }
 
@@ -28,5 +41,3 @@ export function formatDate(date: string) {
 }
 
 export function formatAmount() {}
-
-// length<=10?4:5

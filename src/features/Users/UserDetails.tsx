@@ -6,16 +6,19 @@ import ActionButton from '../../ui/ActionButton';
 
 import { HiArrowLongLeft } from 'react-icons/hi2';
 import UserDetailsContent from '../../ui/UserDetailsContent';
-import UserDetailsHeader from '../../ui/UserDetailsSummary';
+import UserDetailsSummary from '../../ui/UserDetailsSummary';
+import { useUsers } from './useUsers';
+import { UsersPropType } from '../../types';
 
 function UserDetails() {
-  const { userId } = useParams();
+  const { username } = useParams();
+  const { users } = useUsers();
 
-  console.log(userId);
+  const selectedUser: UsersPropType | undefined = users?.find(
+    (user: UsersPropType) => user.userName === username
+  );
 
-  const status = 'active';
-
-  // fetch user based on id
+  console.log(selectedUser);
 
   return (
     <main className="px-[3.5rem] py-[4.5rem] flex flex-col gap-y-9">
@@ -32,33 +35,30 @@ function UserDetails() {
         <div className="flex gap-x-5">
           <ActionButton
             title="blacklist user"
-            disabled={status === 'active'}
+            disabled={selectedUser?.status === 'blacklisted'}
             variation="blacklist"
           />
-          <ActionButton title="activate user" disabled={status === 'active'} variation="activate" />
+          <ActionButton
+            title="activate user"
+            disabled={selectedUser?.status === 'active'}
+            variation="activate"
+          />
         </div>
       </div>
-      <UserDetailsHeader>
-        <UserDetailHeader
-          user="Grace Effiom"
-          id="LSQFf587g90"
-          bank="providus bank"
-          accountNo="9912345678"
-          amount="200000"
-        />
-        <>
-          <nav className="flex items-center justify-center">
-            <ul className="font-user_details_tab flex items-center justify-center [&>:not(:last-child)]:capitalize gap-x-32">
-              <UserDetailMenu menuTitle="general details" path="general-details" />
-              <UserDetailMenu menuTitle="documents" path="documents" />
-              <UserDetailMenu menuTitle="bank details" path="bank-details" />
-              <UserDetailMenu menuTitle="loans" path="loans" />
-              <UserDetailMenu menuTitle="savings" path="savings" />
-              <UserDetailMenu menuTitle="App and System" path="app-and-system" />
-            </ul>
-          </nav>
-        </>
-      </UserDetailsHeader>
+      <UserDetailsSummary>
+        <UserDetailHeader selectedUser={selectedUser} />
+
+        <nav className="flex items-center justify-center">
+          <ul className="font-user_details_tab flex items-center justify-center [&>:not(:last-child)]:capitalize gap-x-32">
+            <UserDetailMenu menuTitle="general details" path="general-details" />
+            <UserDetailMenu menuTitle="documents" path="documents" />
+            <UserDetailMenu menuTitle="bank details" path="bank-details" />
+            <UserDetailMenu menuTitle="loans" path="loans" />
+            <UserDetailMenu menuTitle="savings" path="savings" />
+            <UserDetailMenu menuTitle="App and System" path="app-and-system" />
+          </ul>
+        </nav>
+      </UserDetailsSummary>
 
       <UserDetailsContent>
         <Outlet />

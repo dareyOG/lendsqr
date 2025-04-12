@@ -24,7 +24,7 @@ enum Gender {
   Female = 'Female'
 }
 
-enum Status {
+export enum Status {
   Active = 'active',
   Inactive = 'inactive',
   Blacklisted = 'blacklisted',
@@ -80,11 +80,11 @@ export type UsersPropType = {
 };
 
 export type ButtonPropType = {
-  title?: string;
+  title?: string | number;
   icon?: JSX.Element;
-  disabled: boolean;
+  disabled?: boolean;
   handleClick?: () => void;
-  style?: string;
+  className?: string;
 };
 
 export type ActionButtonPropType = ButtonPropType & {
@@ -126,4 +126,11 @@ export type AuthContextPropType = UserStatePropType & {
   username: string | null;
   handleLogout: () => void;
   handleLogin: (currUser: UserCredentialsPropType) => void;
+};
+
+export type PaginationPropType = {
+  usersPerPage: number;
+  activePage: number;
+  setActivePage: (page: number) => void;
+  setUsersPerPage: (value: number) => void;
 };

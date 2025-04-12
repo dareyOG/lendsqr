@@ -1,20 +1,20 @@
 import { ButtonPropType } from '../types';
 
-function Button({ title, icon, disabled, handleClick, style }: ButtonPropType) {
+function Button({ title, icon, disabled, handleClick, className }: ButtonPropType) {
   if (icon && !title)
     return (
-      <button disabled={disabled} onClick={handleClick} className={`${style} cursor-pointer`}>
+      <button disabled={disabled} onClick={handleClick} className={`${className} cursor-pointer`}>
         {icon}
       </button>
     );
   if (!icon && title)
     return (
-      <button disabled={disabled} onClick={handleClick} className={`${style} cursor-pointer`}>
+      <button disabled={disabled} onClick={handleClick} className={`${className} cursor-pointer`}>
         {title}
       </button>
     );
   return (
-    <button disabled={disabled} onClick={handleClick} className={`${style} cursor-pointer`}>
+    <button disabled={disabled} onClick={handleClick} className={`${className} cursor-pointer`}>
       {icon}
       {title}
     </button>

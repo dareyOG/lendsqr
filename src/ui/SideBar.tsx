@@ -64,15 +64,15 @@ function SideBar() {
   ];
 
   return (
-    <aside className="scroll-auto py-14">
-      <div className=" text-secondaryText mx-[3rem] flex items-center gap-[1.2rem]">
+    <aside className="py-14 overflow-y-scroll h-[100vh]">
+      <div className="text-secondaryText mx-[3rem] flex items-center gap-[1.2rem]">
         <FaBriefcase />
         <select name="organization" className="capitalize outline-0">
           <option value={'switch-organization'}>switch organization</option>
         </select>
       </div>
 
-      <nav className="py-[3rem] flex flex-col gap-y-[2.5rem] ">
+      <nav className="py-[3rem] flex flex-col gap-y-[2.5rem]">
         <SideBarMenu
           menu={dashboard}
           menuTitle=""
@@ -96,9 +96,8 @@ function SideBar() {
           menuTitle={'settings'}
           render={setting => <SideBarMenuItem key={setting.pageTitle} item={setting} />}
         />
-
-        <LogOut />
       </nav>
+      <LogOut />
     </aside>
   );
 }

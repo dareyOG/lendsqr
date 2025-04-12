@@ -11,7 +11,7 @@ function ActionButton({ title, variation, disabled }: ActionButtonPropType) {
         title={title}
         disabled={disabled}
         handleClick={() => {}}
-        style={`${baseStyle}  border-blacklist text-blacklist`}
+        className={`${baseStyle}  border-blacklist text-blacklist`}
       />
     );
 
@@ -21,7 +21,7 @@ function ActionButton({ title, variation, disabled }: ActionButtonPropType) {
         title={title}
         disabled={disabled}
         handleClick={() => {}}
-        style={`${baseStyle}  border-accent text-accent`}
+        className={`${baseStyle}  border-accent text-accent`}
       />
     );
 }

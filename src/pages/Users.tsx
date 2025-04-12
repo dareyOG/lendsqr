@@ -2,32 +2,55 @@ import { useState } from 'react';
 
 import { useUsers } from '../features/Users/useUsers';
 
-import DataLoader from '../ui/DataLoader';
 import Stat from '../ui/Stat';
 import Table from '../ui/Table';
 import TableHeader from '../ui/TableHeader';
 import TableBody from '../ui/TableBody';
 import TableBodyRow from '../ui/TableBodyRow';
-import TableData from '../ui/TableBodyData';
-import Button from '../ui/Button';
+import TableBodyData from '../ui/TableBodyData';
 import Modal from '../ui/Modal';
+import Loader from '../ui/Loader';
 
 import { formatDate, formatName, formatPhoneNumber, formatText } from '../utils/helpers';
 
-import { FaCoins, FaEllipsisVertical, FaFileLines } from 'react-icons/fa6';
 import { HiOutlineUserGroup, HiOutlineUsers } from 'react-icons/hi2';
-import { UsersPropType } from '../types';
+import { FaCoins, FaEllipsisVertical, FaFileLines } from 'react-icons/fa6';
+
+import { Status, UsersPropType } from '../types';
+import Pagination from '../ui/Pagination';
 
 function Users() {
-  const [showModal, setShowModal] = useState(false);
-  const { data, isLoadingUsers } = useUsers();
+  const [selectedID, setSelectedID] = useState<string | null>(null);
+  const { users, isLoadingUsers } = useUsers();
+  const [activePage, setActivePage] = useState(1);
+  const [usersPerPage, setUsersPerPage] = useState(10);
 
-  const users: UsersPropType[] = data;
+  const status: Status[] = [Status.Active, Status.Pending, Status.Blacklisted, Status.Inactive];
 
-  console.log(isLoadingUsers, data);
+  const usersWithStatus: UsersPropType[] = users?.map((user: UsersPropType) => ({
+    ...user,
+    status: status[+user.id % status.length]
+  }));
+
+  // pagination
+
+  const to = usersPerPage * activePage;
+  const from = to - usersPerPage;
+  const paginatedUsers = usersWithStatus.slice(from, to);
+
+  const statusBadge = {
+    active: 'bg-active/[6%] text-active',
+    inactive: 'bg-inactive/[6%] text-inactive',
+    blacklisted: 'bg-blacklist/[6%] text-blacklist',
+    pending: 'bg-pending/[6%] text-pending'
+  };
+
+  const toggleModal = (id: string) => {
+    setSelectedID(prevID => (prevID === id ? null : id));
+  };
 
   return (
-    <main className="px-[3.5rem] py-[4.5rem] flex flex-col gap-y-9">
+    <main className="px-[3.5rem] py-[3rem] flex flex-col gap-y-9">
       <h1 className="w-fit text-[2.4rem] font-medium">Users</h1>
       <section className="grid grid-cols-4 gap-[2.3rem]">
         <Stat stat={2453} icon={<HiOutlineUsers />} title="users" color={'users'} />
@@ -38,69 +61,61 @@ function Users() {
           color={'activeUsers'}
         />
         <Stat stat={12453} icon={<FaFileLines />} title="users with loans" color={'loans'} />
-        <Stat stat={102453} icon={<FaCoins />} title="users with savings" color={'loans'} />
+        <Stat stat={102453} icon={<FaCoins />} title="users with savings" color={'savings'} />
       </section>
-      <section className="bg-white p-10">
-        <Table>
-          <TableHeader />
-          <TableBody>
-            {users?.map(user => (
-              <TableBodyRow key={user.id}>
-                <TableData className="capitalize">{formatText(user.orgName)}</TableData>
-                <TableData className="capitalize">{formatName(user.userName)}</TableData>
-                <TableData className="lowercase">{user.email}</TableData>
-                <TableData>{formatPhoneNumber(user.phoneNumber)}</TableData>
-                <TableData>{formatDate(user.createdAt)}</TableData>
-                <TableData>
-                  {' '}
-                  <span className="text-inactive bg-inactive/[6%] rounded-full px-4 py-2">
-                    inactive
-                  </span>
-                </TableData>
-                <TableData>
-                  <Button
-                    icon={<FaEllipsisVertical />}
-                    disabled
-                    handleClick={() => setShowModal(show => !show)}
-                    style="text-[1rem]"
-                  />
-                  <div className="absolute right-5">{showModal && <Modal />}</div>
-                </TableData>
-              </TableBodyRow>
-            ))}
-            {isLoadingUsers && <DataLoader />}
-          </TableBody>
-        </Table>
+      <section
+        className={`bg-white p-10  flex justify-center items-center ${
+          isLoadingUsers ? 'h-screen' : ''
+        }`}
+      >
+        {isLoadingUsers && !paginatedUsers?.length && <Loader />}
+        {paginatedUsers?.length && !isLoadingUsers && (
+          <Table>
+            <TableHeader />
+            <TableBody>
+              {paginatedUsers?.map(user => {
+                return (
+                  <TableBodyRow key={user?.id}>
+                    <TableBodyData className="capitalize">{formatText(user.orgName)}</TableBodyData>
+                    <TableBodyData className="capitalize">
+                      {formatName(user.userName)}
+                    </TableBodyData>
+                    <TableBodyData className="lowercase">{user.email}</TableBodyData>
+                    <TableBodyData>{formatPhoneNumber(user.phoneNumber)}</TableBodyData>
+                    <TableBodyData>{formatDate(user.createdAt)}</TableBodyData>
+                    <TableBodyData>
+                      <span
+                        role="status"
+                        className={`capitalize rounded-full ${statusBadge[user.status]} px-6 py-3 `}
+                      >
+                        {user.status}
+                      </span>
+                    </TableBodyData>
+                    <TableBodyData className="relative">
+                      <div
+                        role="button"
+                        onClick={() => toggleModal(user.id)}
+                        className="cursor-pointer"
+                      >
+                        <FaEllipsisVertical />
+                      </div>
+                      {selectedID === user.id && <Modal id={user.id} />}
+                    </TableBodyData>
+                  </TableBodyRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        )}
       </section>
+      <Pagination
+        usersPerPage={usersPerPage}
+        activePage={activePage}
+        setActivePage={setActivePage}
+        setUsersPerPage={setUsersPerPage}
+      />
     </main>
   );
 }
 
 export default Users;
-
-/* 
-
-<TableBodyRow key={''}>
-              <TableData>user</TableData>
-              <TableData>Jamie Forson</TableData>
-              <TableData>jforson@test.com</TableData>
-              <TableData>088930919126</TableData>
-              <TableData>April 28, 2025 10:00AM</TableData>
-              <TableData>
-                {' '}
-                <span className="text-inactive bg-inactive/[6%] rounded-full px-4 py-2">
-                  inactive
-                </span>
-              </TableData>
-              <TableData>
-                <Button
-                  icon={<FaEllipsisVertical />}
-                  disabled
-                  handleClick={() => setShowModal(show => !show)}
-                  style="text-[1rem]"
-                />
-                <div className="absolute right-5">{showModal && <Modal />}</div>
-              </TableData>
-            </TableBodyRow>
-
-*/
