@@ -1,23 +1,37 @@
-import { useForm } from 'react-hook-form';
+import { useRef, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useAuth } from './useAuth';
 
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
-import { useAuth } from './useAuth';
-import { UserCredentialsPropType } from '../../types';
-import { useState } from 'react';
+import { LoginPropType } from '../../types';
+import Loader from '../../ui/Loader';
 
 function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm<UserCredentialsPropType>();
-  const { handleLogin } = useAuth();
+  } = useForm<LoginPropType>();
 
-  const onSubmit = ({ email, password }: UserCredentialsPropType) => {
-    if (!email || !password || (!email && !password)) return;
-    handleLogin({ currUser: { email, password } });
+  const auth = useAuth();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const togglePassword = () => {
+    setShowPassword(show => {
+      const newShowPassword = !show;
+      passwordRef.current?.setAttribute('type', newShowPassword ? 'text' : 'password');
+      return newShowPassword;
+    });
+  };
+
+  const onSubmit: SubmitHandler<LoginPropType> = input => {
+    if (input.email.trim() === '' || input.password.trim() === '') return;
+    else {
+      auth.login({ email: input.email, password: input.password });
+    }
   };
 
   return (
@@ -27,51 +41,49 @@ function LoginForm() {
         <p className="text-[2rem] tracking-normal text-secondary">Enter details to login.</p>
       </div>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormRow label="Email" type="email" errorMessage={errors?.email?.message ?? ''}>
+        <FormRow label="Email" field="email" errorMessage={errors.email?.message}>
           <input
             type="email"
             id="email"
-            autoComplete="email"
             {...register('email', {
-              required: 'This field is required',
+              required: 'Input cannot be blank',
               pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'invalid email address'
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: 'Invalid email address'
               }
             })}
             placeholder=""
-            className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent ${
-              errors.email ? 'text-blacklist' : 'text-accent focus:text-secondary'
-            }`}
+            className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent text-accent ${
+              !errors.email ? '' : 'text-blacklist'
+            } focus:text-secondary`}
           />
         </FormRow>
-
-        <FormRow label="Password" type="password" errorMessage={errors?.password?.message ?? ''}>
+        <FormRow label="Password" field="password" errorMessage={errors.password?.message}>
           <input
-            type={showPassword ? 'text' : 'password'}
             id="password"
-            autoComplete="current-password"
+            type={showPassword ? 'text' : 'password'}
             {...register('password', {
-              required: 'This field is required',
-              minLength: { value: 6, message: 'ogbeni, your password nor make👎' },
-              maxLength: { value: 8, message: 'Calm down😒, 8 characters don do' }
+              required: 'Input cannot be blank',
+              minLength: {
+                value: 6,
+                message: 'Password must be at least 6 characters long'
+              }
             })}
             placeholder=""
-            className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent ${
-              errors.password ? 'text-blacklist' : 'text-accent focus:text-secondary'
-            }`}
+            className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent text-accent ${
+              !errors.password ? '' : 'text-blacklist'
+            } focus:text-secondary`}
           />
           <span
             role="button"
             onClick={() => {
-              setShowPassword(show => !show);
+              togglePassword();
             }}
-            className="absolute uppercase text-[1.2rem] font-semibold text-accent top-[35%] right-[3%] cursor-pointer"
+            className="absolute uppercase text-[1.2rem] font-semibold text-accent top-[50%] right-[1rem] transform -translate-y-1/2 cursor-pointer"
           >
             {showPassword ? 'hide' : 'show'}
           </span>
         </FormRow>
-
         <div
           role="button"
           className="text-accent w-fit uppercase cursor-pointer text-[1.2rem] font-semibold tracking-[10%] hover:underline"
@@ -79,7 +91,7 @@ function LoginForm() {
           Forgot password?
         </div>
         <button className="bg-accent w-full p-5 rounded-[0.8rem] uppercase text-[1.4rem] text-white font-semibold hover:bg-accent/50 cursor-pointer">
-          {isSubmitting ? 'Logging in' : 'log in'}
+          {isSubmitting ? <Loader /> : 'log in'}
         </button>
       </Form>
     </section>

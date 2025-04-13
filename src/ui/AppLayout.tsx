@@ -5,7 +5,7 @@ import Header from './Header';
 
 function AppLayout() {
   return (
-    <div className="grid grid-rows-[auto_1fr]">
+    <div className="grid grid-rows-[auto_1fr] h-full">
       <Header />
       <Main>
         <Outlet />

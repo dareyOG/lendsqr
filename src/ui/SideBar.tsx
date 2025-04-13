@@ -64,7 +64,7 @@ function SideBar() {
   ];
 
   return (
-    <aside className="py-14 overflow-y-scroll h-[100vh]">
+    <aside className="py-14 overflow-auto max-h-full no-scrollbar">
       <div className="text-secondaryText mx-[3rem] flex items-center gap-[1.2rem]">
         <FaBriefcase />
         <select name="organization" className="capitalize outline-0">

@@ -1,73 +1,46 @@
-/* eslint-disable react-refresh/only-export-components */
+import { createContext, ReactNode, useState } from 'react';
+import { AuthContextProviderPropType, LoginPropType } from '../types';
+import { randomAlphaNumeric } from '../utils/helpers';
 import { useNavigate } from 'react-router-dom';
-import { createContext, ReactNode, useReducer } from 'react';
 
-import {
-  AuthContextPropType,
-  UserActionPropType,
-  UserCredentialsPropType,
-  UserStatePropType
-} from '../types';
-
-export const AuthContext = createContext<AuthContextPropType>({
-  user: null,
-  isAuthenticated: false,
+const AuthContext = createContext<AuthContextProviderPropType>({
   username: null,
-  handleLogin: () => {},
-  handleLogout: () => {}
+  token: '',
+  login: () => {},
+  logout: () => {}
 });
 
-const initialState: UserStatePropType = {
-  user: null,
-  isAuthenticated: false
-};
-
-function authReducer(state: UserStatePropType, action: UserActionPropType): UserStatePropType {
-  switch (action.type) {
-    case 'log_in':
-      return {
-        ...state,
-        user: { email: action.payload?.email ?? '', password: action.payload?.password ?? '' },
-        isAuthenticated: true
-      };
-
-    case 'log_out':
-      return { ...state };
-
-    default:
-      throw new Error('unknown action');
-  }
-}
-
-export default function AuthContextProvider({ children }: { children: ReactNode }) {
-  const [{ user, isAuthenticated }, dispatch] = useReducer(authReducer, initialState);
+function AuthContextProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
+  const storedInfo = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user') ?? '{}')
+    : null;
+  const [user, setUser] = useState<string | null>(storedInfo?.email);
+  const [token, setToken] = useState(storedInfo?.token || '');
 
-  const handleLogin = (currUser: UserCredentialsPropType) => {
-    dispatch({
-      type: 'log_in',
-      payload: { email: currUser.email, password: currUser.password }
-    });
+  const username = user
+    ? user.replace(/[_0-9A-Z]/g, '').split('@')[0]
+    : localStorage.getItem('user');
 
-    const token = btoa(encodeURIComponent(`${currUser.email}:${currUser.password}`));
-    localStorage.setItem('token', token);
+  const login = (data: LoginPropType) => {
+    setUser(data.email);
+    setToken(randomAlphaNumeric(50));
+    localStorage.setItem('user', JSON.stringify({ ...data, token: randomAlphaNumeric(50) }));
     navigate('/users', { replace: true });
   };
 
-  // extract username
-  const username = localStorage.getItem('token')
-    ? atob(localStorage.getItem('token') || '').split(/@|_|(?=\d)|(?=[A-Z])/)[0]
-    : null;
-
-  const handleLogout = () => {
-    dispatch({ type: 'log_out' });
-    localStorage.removeItem('token');
+  const logout = () => {
+    setUser(null);
+    setToken('');
+    localStorage.removeItem('user');
     navigate('/login', { replace: true });
   };
 
   return (
-    <AuthContext.Provider value={{ user, username, isAuthenticated, handleLogin, handleLogout }}>
+    <AuthContext.Provider value={{ username, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
+
+export { AuthContext, AuthContextProvider };

@@ -6,10 +6,13 @@ import { useUsers } from './useUsers';
 import { formatPhoneNumber } from '../../utils/helpers';
 
 function GeneralDetails() {
-  const { userId } = useParams();
+  const { username } = useParams();
+
   const { users } = useUsers();
 
-  const selectedUser: UsersPropType = users?.find((user: UsersPropType) => user.id === userId);
+  const selectedUser: UsersPropType = users?.find(
+    (user: UsersPropType) => user.userName === username
+  );
 
   return (
     <section className="border rounded-[0.4rem] border-transparent px-[2.5rem] bg-white divide-y-[0.1rem] divide-primary/10">
@@ -19,7 +22,7 @@ function GeneralDetails() {
           value={`${selectedUser?.profile.firstName} ${selectedUser?.profile.lastName}`}
         />
         <DetailInfo title="phone number" value={formatPhoneNumber(selectedUser?.phoneNumber)} />
-        <DetailInfo title="email address" value={selectedUser?.email} />
+        <DetailInfo title="email address" value={selectedUser?.email.toLowerCase()} />
         <DetailInfo title="bvn" value={'07060780922'} />
         <DetailInfo title="gender" value={selectedUser?.profile.gender} />
         <DetailInfo title="marital status" value={'single'} />
@@ -27,7 +30,7 @@ function GeneralDetails() {
         <DetailInfo title="type of residence" value={"parent's apartment"} />
       </SectionDetail>
 
-      <SectionDetail sectionTitle="Education and Employment" style="grid-cols-4">
+      <SectionDetail sectionTitle="Education and Employment" className="grid-cols-4">
         <DetailInfo title="level of education" value={selectedUser?.education.level ?? ''} />
         <DetailInfo
           title="employment status"
@@ -60,10 +63,11 @@ function GeneralDetails() {
         />
         <DetailInfo
           title="email address"
-          value={
-            selectedUser?.guarantor.address ??
-            ''.toLowerCase().split(' ')[1]?.padEnd(16, '@gmail.com')
-          }
+          value={selectedUser?.guarantor.address
+            .replace(' ', '')
+            .toLowerCase()
+            .slice(0, 7)
+            .padEnd(17, '@gmail.com')}
         />
         <DetailInfo title="relationship" value={'sister'} />
       </SectionDetail>

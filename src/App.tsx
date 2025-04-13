@@ -2,8 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
-import AuthContextProvider from './context/AuthContext';
+import { AuthContextProvider } from './context/AuthContext';
 
 import UserDetails from './features/Users/UserDetails';
 import GeneralDetails from './features/Users/GeneralDetails';

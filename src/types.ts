@@ -24,13 +24,6 @@ enum Gender {
   Female = 'Female'
 }
 
-export enum Status {
-  Active = 'active',
-  Inactive = 'inactive',
-  Blacklisted = 'blacklisted',
-  Pending = 'pending'
-}
-
 type UserProfilePropType = {
   firstName: string;
   lastName: string;
@@ -69,10 +62,10 @@ export type UsersPropType = {
   phoneNumber: string;
   createdAt: string;
   lastActiveDate: string;
+  status: string;
   orgName: string;
   accountBalance: string;
   accountNumber: string;
-  status: Status;
   education: UserEductaionPropType;
   guarantor: UserGuarantorPropType;
   profile: UserProfilePropType;
@@ -104,28 +97,7 @@ export type UserDetailsHeaderPropType = {
 export type SectionDetailsPropType = {
   sectionTitle: string;
   children: ReactNode;
-  style?: string;
-};
-
-export type UserCredentialsPropType = {
-  email: string;
-  password: string;
-};
-
-export type UserStatePropType = {
-  user: UserCredentialsPropType | null;
-  isAuthenticated: boolean;
-};
-
-export type UserActionPropType = {
-  type: 'log_in' | 'log_out';
-  payload?: UserCredentialsPropType;
-};
-
-export type AuthContextPropType = UserStatePropType & {
-  username: string | null;
-  handleLogout: () => void;
-  handleLogin: (currUser: UserCredentialsPropType) => void;
+  className?: string;
 };
 
 export type PaginationPropType = {
@@ -133,4 +105,16 @@ export type PaginationPropType = {
   activePage: number;
   setActivePage: (page: number) => void;
   setUsersPerPage: (value: number) => void;
+};
+
+export type LoginPropType = {
+  email: string;
+  password: string;
+};
+
+export type AuthContextProviderPropType = {
+  username: string | null;
+  token: string;
+  login: (data: LoginPropType) => void;
+  logout: () => void;
 };

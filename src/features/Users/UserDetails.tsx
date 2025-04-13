@@ -18,8 +18,6 @@ function UserDetails() {
     (user: UsersPropType) => user.userName === username
   );
 
-  console.log(selectedUser);
-
   return (
     <main className="px-[3.5rem] py-[4.5rem] flex flex-col gap-y-9">
       <Link
@@ -46,7 +44,7 @@ function UserDetails() {
         </div>
       </div>
       <UserDetailsSummary>
-        <UserDetailHeader selectedUser={selectedUser} />
+        {selectedUser && <UserDetailHeader selectedUser={selectedUser} />}
 
         <nav className="flex items-center justify-center">
           <ul className="font-user_details_tab flex items-center justify-center [&>:not(:last-child)]:capitalize gap-x-32">

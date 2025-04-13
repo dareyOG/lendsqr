@@ -1,19 +1,25 @@
-import { FaRegEye, FaUserCheck, FaUserXmark } from 'react-icons/fa6';
-import ModalItem from './ModalItem';
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../features/Users/useUsers';
+import ModalItem from './ModalItem';
+import { FaRegEye, FaUserCheck, FaUserXmark } from 'react-icons/fa6';
 import { UsersPropType } from '../types';
 
-function Modal({ id }: { id: string }) {
+function Modal({
+  currentStatus,
+  selectedID,
+  handleBlacklist,
+  handleActivate
+}: {
+  currentStatus: string;
+  selectedID: string;
+  handleBlacklist: () => void;
+  handleActivate: () => void;
+}) {
   const navigate = useNavigate();
   const { users } = useUsers();
 
-  const clickedUser = users?.find((user: UsersPropType) => user.id === id);
+  const currentUser = users?.find((user: UsersPropType) => user.id === selectedID);
 
-  const handleBlacklist = () => {};
-  const handleActivate = () => {};
-
-  // flex absolute top-0 -right-[10%] bg-white shadow-lg p-4  flex-col gap-y-4 border border-transparent drop-shadow-xl w-fit rounded-[0.5rem] z-50
   return (
     <ul
       role="dialog"
@@ -22,12 +28,32 @@ function Modal({ id }: { id: string }) {
       <ModalItem
         icon={<FaRegEye />}
         item="view details"
-        handleClick={() => navigate(`/users/${clickedUser.userName}`)}
+        handleClick={() => navigate(`/users/${currentUser?.userName}`)}
       />
-      <ModalItem icon={<FaUserXmark />} item="blacklist user" handleClick={handleBlacklist} />
-      <ModalItem icon={<FaUserCheck />} item="activate user" handleClick={handleActivate} />
+      {currentStatus === 'blacklisted' && (
+        <ModalItem icon={<FaUserXmark />} item="blacklist user" handleClick={handleBlacklist} />
+      )}
+      {currentStatus !== 'active' && (
+        <ModalItem icon={<FaUserCheck />} item="activate user" handleClick={handleActivate} />
+      )}
     </ul>
   );
 }
 
 export default Modal;
+
+/* 
+
+  const handleBlacklist = (id: string) => {
+    setUsersWithStatus(prevUsers =>
+      prevUsers.map(user => (user.id === id ? { ...user, status: 'blacklisted' } : user))
+    );
+  };
+
+  const handleActivate = (id: string) => {
+    setUsersWithStatus(prevUsers =>
+      prevUsers.map(user => (user.id === id ? { ...user, status: 'active' } : user))
+    );
+  };
+
+*/

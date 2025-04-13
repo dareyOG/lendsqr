@@ -16,27 +16,33 @@ import { formatDate, formatName, formatPhoneNumber, formatText } from '../utils/
 import { HiOutlineUserGroup, HiOutlineUsers } from 'react-icons/hi2';
 import { FaCoins, FaEllipsisVertical, FaFileLines } from 'react-icons/fa6';
 
-import { Status, UsersPropType } from '../types';
+import { UsersPropType } from '../types';
 import Pagination from '../ui/Pagination';
+import { useUpdateStatus } from '../features/Users/useUpdateStatus';
 
 function Users() {
-  const [selectedID, setSelectedID] = useState<string | null>(null);
   const { users, isLoadingUsers } = useUsers();
+
+  const [selectedID, setSelectedID] = useState<string | null>(null);
   const [activePage, setActivePage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(10);
 
-  const status: Status[] = [Status.Active, Status.Pending, Status.Blacklisted, Status.Inactive];
+  const status = ['active', 'blacklisted', 'pending', 'inactive'];
 
   const usersWithStatus: UsersPropType[] = users?.map((user: UsersPropType) => ({
     ...user,
     status: status[+user.id % status.length]
   }));
 
+  // update user's status
+  const { usersUpdate, activate, blacklist } = useUpdateStatus(usersWithStatus);
+
   // pagination
 
   const to = usersPerPage * activePage;
   const from = to - usersPerPage;
-  const paginatedUsers = usersWithStatus.slice(from, to);
+
+  const paginatedUsers = usersUpdate?.slice(from, to);
 
   const statusBadge = {
     active: 'bg-active/[6%] text-active',
@@ -86,7 +92,9 @@ function Users() {
                     <TableBodyData>
                       <span
                         role="status"
-                        className={`capitalize rounded-full ${statusBadge[user.status]} px-6 py-3 `}
+                        className={`capitalize rounded-full ${
+                          statusBadge[user.status as keyof typeof statusBadge]
+                        } px-6 py-3 `}
                       >
                         {user.status}
                       </span>
@@ -99,7 +107,16 @@ function Users() {
                       >
                         <FaEllipsisVertical />
                       </div>
-                      {selectedID === user.id && <Modal id={user.id} />}
+                      {selectedID === user.id && (
+                        <Modal
+                          currentStatus={user.status}
+                          selectedID={selectedID}
+                          handleBlacklist={() => blacklist(selectedID)}
+                          handleActivate={() => {
+                            activate(selectedID);
+                          }}
+                        />
+                      )}
                     </TableBodyData>
                   </TableBodyRow>
                 );
