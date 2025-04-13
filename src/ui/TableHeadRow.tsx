@@ -1,25 +1,25 @@
 import TableHeadColumn from './TableHeadColumn';
 
-function TableHeadRow() {
+function TableHeadRow({ toggleFilterForm }: { toggleFilterForm: () => void }) {
   return (
     <tr className="text-nowrap uppercase [&_th]:text-start">
       <th>
-        <TableHeadColumn title="organization" />
+        <TableHeadColumn title="organization" toggleFilterForm={toggleFilterForm} />
       </th>
       <th>
-        <TableHeadColumn title="username" />
+        <TableHeadColumn title="username" toggleFilterForm={toggleFilterForm} />
       </th>
       <th>
-        <TableHeadColumn title="email" />
+        <TableHeadColumn title="email" toggleFilterForm={toggleFilterForm} />
       </th>
       <th>
-        <TableHeadColumn title="phone number" />
+        <TableHeadColumn title="phone number" toggleFilterForm={toggleFilterForm} />
       </th>
       <th>
-        <TableHeadColumn title="date joined" />
+        <TableHeadColumn title="date joined" toggleFilterForm={toggleFilterForm} />
       </th>
       <th>
-        <TableHeadColumn title="status" />
+        <TableHeadColumn title="status" toggleFilterForm={toggleFilterForm} />
       </th>
     </tr>
   );

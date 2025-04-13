@@ -1,8 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UsersPropType } from '../../types';
+import { useUsers } from './useUsers';
 
-export function useUpdateStatus(initialState: UsersPropType[]) {
-  const [usersUpdate, setUsersUpdate] = useState<UsersPropType[]>(initialState);
+export function useUpdateStatus() {
+  const { users, isLoadingUsers } = useUsers();
+
+  const status = ['active', 'blacklisted', 'pending', 'inactive'];
+
+  const usersWithStatus: UsersPropType[] = users?.map((user: UsersPropType) => ({
+    ...user,
+    status: status[+user.id % status.length]
+  }));
+
+  const [usersUpdate, setUsersUpdate] = useState<UsersPropType[]>(() => {
+    const users = localStorage.getItem('users');
+    return users ? JSON.parse(users) : usersWithStatus;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(usersUpdate));
+  }, [usersUpdate]);
 
   const activate = (id: string) => {
     setUsersUpdate(
@@ -15,7 +32,6 @@ export function useUpdateStatus(initialState: UsersPropType[]) {
       usersUpdate?.map(user => (user.id === id ? { ...user, status: 'blacklisted' } : { ...user }))
     );
   };
-  console.log(usersUpdate);
 
-  return { usersUpdate, activate, blacklist };
+  return { isLoadingUsers, usersUpdate, setUsersUpdate, activate, blacklist };
 }

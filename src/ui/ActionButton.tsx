@@ -1,7 +1,7 @@
 import { ActionButtonPropType } from '../types';
 import Button from './Button';
 
-function ActionButton({ title, variation, disabled }: ActionButtonPropType) {
+function ActionButton({ title, handleClick, variation, disabled }: ActionButtonPropType) {
   const baseStyle =
     'border rounded-[0.8rem] px-[2rem] py-[0.5rem]  uppercase text-[1.4rem] text-center tracking-[10%] font-semibold';
 
@@ -10,7 +10,7 @@ function ActionButton({ title, variation, disabled }: ActionButtonPropType) {
       <Button
         title={title}
         disabled={disabled}
-        handleClick={() => {}}
+        handleClick={handleClick}
         className={`${baseStyle}  border-blacklist text-blacklist`}
       />
     );
@@ -20,7 +20,7 @@ function ActionButton({ title, variation, disabled }: ActionButtonPropType) {
       <Button
         title={title}
         disabled={disabled}
-        handleClick={() => {}}
+        handleClick={handleClick}
         className={`${baseStyle}  border-accent text-accent`}
       />
     );

@@ -7,12 +7,12 @@ import { AuthContextProvider } from './context/AuthContext';
 import UserDetails from './features/Users/UserDetails';
 import GeneralDetails from './features/Users/GeneralDetails';
 
-import Login from './pages/LogIn';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
 
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
+import Login from './pages/Login';
 
 const queryClient = new QueryClient();
 

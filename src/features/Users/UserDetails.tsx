@@ -1,20 +1,21 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
+import { useUpdateStatus } from './useUpdateStatus';
 
 import UserDetailMenu from '../../ui/UserDetailMenu';
 import UserDetailHeader from './UserDetailsHeader';
 import ActionButton from '../../ui/ActionButton';
-
-import { HiArrowLongLeft } from 'react-icons/hi2';
 import UserDetailsContent from '../../ui/UserDetailsContent';
 import UserDetailsSummary from '../../ui/UserDetailsSummary';
-import { useUsers } from './useUsers';
+
+import { HiArrowLongLeft } from 'react-icons/hi2';
 import { UsersPropType } from '../../types';
 
 function UserDetails() {
   const { username } = useParams();
-  const { users } = useUsers();
+  const navigate = useNavigate();
+  const { usersUpdate, blacklist, activate } = useUpdateStatus();
 
-  const selectedUser: UsersPropType | undefined = users?.find(
+  const selectedUser: UsersPropType | undefined = usersUpdate?.find(
     (user: UsersPropType) => user.userName === username
   );
 
@@ -31,16 +32,30 @@ function UserDetails() {
         <h1 className="w-fit text-[2.4rem] font-medium">User Details</h1>
 
         <div className="flex gap-x-5">
-          <ActionButton
-            title="blacklist user"
-            disabled={selectedUser?.status === 'blacklisted'}
-            variation="blacklist"
-          />
-          <ActionButton
-            title="activate user"
-            disabled={selectedUser?.status === 'active'}
-            variation="activate"
-          />
+          {selectedUser?.status !== 'blacklisted' && (
+            <ActionButton
+              title="blacklist user"
+              handleClick={() => {
+                if (selectedUser?.id) {
+                  blacklist(selectedUser.id);
+                  navigate('/users');
+                }
+              }}
+              variation="blacklist"
+            />
+          )}
+          {selectedUser?.status !== 'active' && (
+            <ActionButton
+              title="activate user"
+              handleClick={() => {
+                if (selectedUser?.id) {
+                  activate(selectedUser.id);
+                  navigate('/users');
+                }
+              }}
+              variation="activate"
+            />
+          )}
         </div>
       </div>
       <UserDetailsSummary>
