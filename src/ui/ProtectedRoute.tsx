@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../features/Authentication/useAuth';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleStorageChange = () => {
-      if (!localStorage.getItem('user')) {
-        // If the token is removed, redirect to login
+      if (!localStorage.get('users') || (!localStorage.getItem('curr_user') && !isAuthenticated)) {
+        localStorage.clear();
         navigate('/login', { replace: true });
       }
     };
@@ -16,7 +18,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, [navigate]);
+  }, [navigate, isAuthenticated]);
 
   return children;
 }

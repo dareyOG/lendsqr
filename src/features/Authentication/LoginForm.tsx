@@ -2,16 +2,14 @@ import { useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAuth } from './useAuth';
 
-import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import { LoginPropType } from '../../types';
-import Loader from '../../ui/Loader';
 
 function LoginForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    formState: { errors }
   } = useForm<LoginPropType>();
 
   const auth = useAuth();
@@ -35,66 +33,58 @@ function LoginForm() {
   };
 
   return (
-    <section>
-      <div className="flex flex-col gap-y-2 mb-20">
-        <p className="font-bold text-[4rem] tracking-[-4%]">Welcome!</p>
-        <p className="text-[2rem] tracking-normal text-secondary">Enter details to login.</p>
-      </div>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormRow label="Email" field="email" errorMessage={errors.email?.message}>
-          <input
-            type="email"
-            id="email"
-            {...register('email', {
-              required: 'Input cannot be blank',
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: 'Invalid email address'
-              }
-            })}
-            placeholder=""
-            className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent text-accent ${
-              !errors.email ? '' : 'text-blacklist'
-            } focus:text-secondary`}
-          />
-        </FormRow>
-        <FormRow label="Password" field="password" errorMessage={errors.password?.message}>
-          <input
-            id="password"
-            type={showPassword ? 'text' : 'password'}
-            {...register('password', {
-              required: 'Input cannot be blank',
-              minLength: {
-                value: 6,
-                message: 'Password must be at least 6 characters long'
-              }
-            })}
-            placeholder=""
-            className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent text-accent ${
-              !errors.password ? '' : 'text-blacklist'
-            } focus:text-secondary`}
-          />
-          <span
-            role="button"
-            onClick={() => {
-              togglePassword();
-            }}
-            className="absolute uppercase text-[1.2rem] font-semibold text-accent top-[50%] right-[1rem] transform -translate-y-1/2 cursor-pointer"
-          >
-            {showPassword ? 'hide' : 'show'}
-          </span>
-        </FormRow>
-        <div
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-14">
+      <FormRow label="Email" field="email" errorMessage={errors.email?.message}>
+        <input
+          type="email"
+          id="email"
+          {...register('email', {
+            required: 'Input cannot be blank',
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: 'Invalid email address'
+            }
+          })}
+          placeholder=""
+          className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent text-accent ${
+            !errors.email ? '' : 'text-blacklist'
+          } focus:text-secondary`}
+        />
+      </FormRow>
+      <FormRow label="Password" field="password" errorMessage={errors.password?.message}>
+        <input
+          id="password"
+          type={showPassword ? 'text' : 'password'}
+          {...register('password', {
+            required: 'Input cannot be blank',
+            minLength: {
+              value: 6,
+              message: 'Password must be at least 6 characters long'
+            }
+          })}
+          placeholder=""
+          className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent text-accent ${
+            !errors.password ? '' : 'text-blacklist'
+          } focus:text-secondary`}
+        />
+        <span
           role="button"
-          className="text-accent w-fit uppercase cursor-pointer text-[1.2rem] font-semibold tracking-[10%] hover:underline"
+          onClick={togglePassword}
+          className="absolute uppercase text-[1.2rem] font-semibold text-accent top-[50%] right-[1rem] transform -translate-y-1/2 cursor-pointer"
         >
-          Forgot password?
-        </div>
-        <button className="bg-accent w-full p-5 rounded-[0.8rem] uppercase text-[1.4rem] text-white font-semibold hover:bg-accent/50 cursor-pointer">
-          {isSubmitting ? <Loader /> : 'log in'}
-        </button>
-      </Form>
-    </section>
+          {showPassword ? 'hide' : 'show'}
+        </span>
+      </FormRow>
+      <div
+        role="button"
+        className="text-accent w-fit uppercase cursor-pointer text-[1.2rem] font-semibold tracking-[10%] hover:underline"
+      >
+        Forgot password?
+      </div>
+      <button className="bg-accent w-full p-5 rounded-[0.8rem] uppercase text-[1.4rem] text-white font-semibold hover:bg-accent/50 cursor-pointer">
+        log in
+      </button>
+    </form>
   );
 }
 

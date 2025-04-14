@@ -115,6 +115,7 @@ export type LoginPropType = {
 export type AuthContextProviderPropType = {
   username: string | null;
   token: string;
+  isAuthenticated: boolean;
   login: (data: LoginPropType) => void;
   logout: () => void;
 };

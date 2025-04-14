@@ -23,20 +23,9 @@ function Filter() {
   };
 
   const filter = () => {
-    const filteredResult = usersUpdate
-      .slice()
-      .filter(
-        user =>
-          user.userName === username ||
-          user.orgName === organization ||
-          user.email === email ||
-          user.createdAt === date ||
-          user.phoneNumber === phone ||
-          user.status === status
-      );
-
-    setUsersUpdate(filteredResult);
-    console.log(usersUpdate);
+    const filteredResult = usersUpdate.slice().filter(user => user.status === status);
+    if (!status) return;
+    else setUsersUpdate(filteredResult);
 
     return usersUpdate;
   };

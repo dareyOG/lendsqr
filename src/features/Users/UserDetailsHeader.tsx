@@ -1,6 +1,6 @@
 import { FaRegUser, FaStar } from 'react-icons/fa6';
-import { UsersPropType } from '../../types';
 import { FaStarHalfAlt } from 'react-icons/fa';
+import { UsersPropType } from '../../types';
 
 function UserDetailsHeader({ selectedUser }: { selectedUser: UsersPropType }) {
   return (
