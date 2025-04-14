@@ -1,6 +1,6 @@
 import LoginForm from '../features/Authentication/LoginForm';
 
-function Login() {
+function LoginPage() {
   return (
     <main className="grid grid-cols-2">
       <section className="m-20">
@@ -23,4 +23,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

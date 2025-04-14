@@ -7,7 +7,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import UserDetails from './features/Users/UserDetails';
 import GeneralDetails from './features/Users/GeneralDetails';
 
-import Login from './pages/Login';
+import LoginPage from './pages/LoginPage';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
 
@@ -63,7 +63,7 @@ function App() {
               <Route path="systems-messages" element={<Users />} />
             </Route>
             <Route index element={<Navigate replace to={'login'} />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<LoginPage />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </AuthContextProvider>
