@@ -1,34 +1,11 @@
+import { Link } from 'react-router-dom';
+import Avatar from './Avatar';
+import { FaBriefcase, FaCaretDown } from 'react-icons/fa6';
 import LogOut from '../features/Authentication/LogOut';
-
 import SideBarMenu from './SideBarMenu';
 import SideBarMenuItem from './SideBarMenuItem';
 
-import {
-  FaBriefcase,
-  FaChartColumn,
-  FaCoins,
-  FaFan,
-  FaHandHoldingDollar,
-  FaHandshake,
-  FaLandmark,
-  FaMoneyBillTransfer,
-  FaPiggyBank,
-  FaSackDollar,
-  FaScroll,
-  FaUserCheck,
-  FaUserGear,
-  FaUserGroup,
-  FaUsers,
-  FaUserXmark
-} from 'react-icons/fa6';
-import { HiClipboardList } from 'react-icons/hi';
-import { HiAdjustmentsHorizontal, HiPercentBadge } from 'react-icons/hi2';
-import { FaHome } from 'react-icons/fa';
-import { GiCarWheel } from 'react-icons/gi';
-
-import { MenuPropType } from '../types';
-
-function SideBar() {
+function ModalNav() {
   const dashboard: MenuPropType[] = [
     { pageTitle: 'Dashboard', path: '/dashboard', icon: <FaHome /> }
   ];
@@ -64,42 +41,53 @@ function SideBar() {
   ];
 
   return (
-    <aside className="py-14 overflow-auto max-h-full no-scrollbar hidden lg:block">
-      <div className="text-secondaryText mx-[3rem] flex items-center gap-[1.2rem]">
-        <FaBriefcase />
-        <select name="organization" className="capitalize outline-0">
-          <option value={'switch-organization'}>switch organization</option>
-        </select>
+    <div role="dialog" className="">
+      <div className="bg-inactive/50 w-full h-screen relative"></div>
+      <div className="flex justify-end">
+        <div className="text-blacklist text-3xl absolute top-30 border-8 border-accent z-10">
+          <div className="flex items-center">
+            <Link to="/docs" className="underline">
+              Docs
+            </Link>
+            <Avatar />
+          </div>
+          <nav>
+            <div className="flex items-center gap-[1.2rem]">
+              <FaBriefcase />
+              <span>Switch organization</span>
+              <FaCaretDown />
+            </div>
+            <div className="py-[3rem] flex flex-col gap-y-[2.5rem] z-20">
+              <SideBarMenu
+                menu={dashboard}
+                menuTitle=""
+                render={dashboard => <SideBarMenuItem key={dashboard.pageTitle} item={dashboard} />}
+              />
+
+              <SideBarMenu
+                menu={customers}
+                menuTitle={'customers'}
+                render={customer => <SideBarMenuItem key={customer.pageTitle} item={customer} />}
+              />
+
+              <SideBarMenu
+                menu={businesses}
+                menuTitle={'businesses'}
+                render={business => <SideBarMenuItem key={business.pageTitle} item={business} />}
+              />
+
+              <SideBarMenu
+                menu={settings}
+                menuTitle={'settings'}
+                render={setting => <SideBarMenuItem key={setting.pageTitle} item={setting} />}
+              />
+            </div>
+            <LogOut />
+          </nav>
+        </div>
       </div>
-
-      <nav className="py-[3rem] flex flex-col gap-y-[2.5rem] z-20">
-        <SideBarMenu
-          menu={dashboard}
-          menuTitle=""
-          render={dashboard => <SideBarMenuItem key={dashboard.pageTitle} item={dashboard} />}
-        />
-
-        <SideBarMenu
-          menu={customers}
-          menuTitle={'customers'}
-          render={customer => <SideBarMenuItem key={customer.pageTitle} item={customer} />}
-        />
-
-        <SideBarMenu
-          menu={businesses}
-          menuTitle={'businesses'}
-          render={business => <SideBarMenuItem key={business.pageTitle} item={business} />}
-        />
-
-        <SideBarMenu
-          menu={settings}
-          menuTitle={'settings'}
-          render={setting => <SideBarMenuItem key={setting.pageTitle} item={setting} />}
-        />
-      </nav>
-      <LogOut />
-    </aside>
+    </div>
   );
 }
 
-export default SideBar;
+export default ModalNav;

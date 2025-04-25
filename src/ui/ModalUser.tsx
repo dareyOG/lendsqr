@@ -6,7 +6,7 @@ import ModalItem from './ModalItem';
 import { FaRegEye, FaUserCheck, FaUserXmark } from 'react-icons/fa6';
 import { UsersPropType } from '../types';
 
-function Modal({
+function ModalUser({
   currentStatus,
   selectedID,
   handleBlacklist,
@@ -42,7 +42,7 @@ function Modal({
   );
 }
 
-export default Modal;
+export default ModalUser;
 
 /* 
 

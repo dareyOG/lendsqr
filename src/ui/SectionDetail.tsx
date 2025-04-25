@@ -3,7 +3,7 @@ import { SectionDetailsPropType } from '../types';
 function SectionDetail({
   sectionTitle,
   children,
-  className = 'grid-cols-5'
+  className = 'lg:grid-cols-5'
 }: SectionDetailsPropType) {
   return (
     <div className="flex flex-col gap-5 py-10">

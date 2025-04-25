@@ -28,10 +28,10 @@ function UserDetails() {
         <HiArrowLongLeft />
         <span>Back to Users</span>
       </Link>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <h1 className="w-fit text-[2.4rem] font-medium">User Details</h1>
 
-        <div className="flex gap-x-5">
+        <div className="flex gap-x-5 mt-[1.5rem] lg:mt-0">
           {selectedUser?.status !== 'blacklisted' && (
             <ActionButton
               title="blacklist user"
@@ -58,11 +58,12 @@ function UserDetails() {
           )}
         </div>
       </div>
+
       <UserDetailsSummary>
         {selectedUser && <UserDetailHeader selectedUser={selectedUser} />}
 
-        <nav className="flex items-center justify-center">
-          <ul className="font-user_details_tab flex items-center justify-center [&>:not(:last-child)]:capitalize gap-x-32">
+        <nav className="flex lg:items-center lg:justify-center">
+          <ul className="font-user_details_tab flex flex-col w-full items-center lg:flex-row lg:items-center lg:justify-center [&>:not(:last-child)]:capitalize lg:gap-x-32">
             <UserDetailMenu menuTitle="general details" path="general-details" />
             <UserDetailMenu menuTitle="documents" path="documents" />
             <UserDetailMenu menuTitle="bank details" path="bank-details" />

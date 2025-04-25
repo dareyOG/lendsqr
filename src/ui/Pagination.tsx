@@ -1,7 +1,7 @@
 import { useUsers } from '../features/Users/useUsers';
-import { PaginationPropType } from '../types';
 import Button from './Button';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
+import { PaginationPropType } from '../types';
 
 function Pagination({
   usersPerPage,
@@ -10,11 +10,13 @@ function Pagination({
   setUsersPerPage
 }: PaginationPropType) {
   const { users } = useUsers();
+  // console.log(users);
+
   const pageNumbers: number[] = [];
 
-  const totalPages = Math.ceil(users?.length / usersPerPage);
+  const totalPages: number = Math.ceil((users?.length as number) / usersPerPage);
 
-  for (let currPage = 1; currPage <= totalPages; currPage++) {
+  for (let currPage = 1; currPage <= (totalPages as number); currPage++) {
     pageNumbers.push(currPage);
   }
 
@@ -35,9 +37,9 @@ function Pagination({
   };
 
   return (
-    <nav className="  flex items-center justify-between">
-      <div className="">
-        showing{' '}
+    <nav className="flex flex-col gap-y-10 md:flex-row items-center justify-between">
+      <div className="text-nowrap">
+        showing
         <span className="outline-1 rounded-md">
           <select value={usersPerPage} onChange={e => setUsersPerPage(+e.target.value)}>
             <option value={'10'}>10</option>

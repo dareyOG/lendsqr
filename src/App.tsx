@@ -30,9 +30,9 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              <Route path="dashboard" element={<Users />} />
+              <Route path="/dashboard" element={<Users />} />
               <Route path="users" element={<Users />} />
-              <Route path="users/:username" element={<UserDetails />}>
+              <Route path="/users/:username" element={<UserDetails />}>
                 <Route index element={<Navigate replace to={'general-details'} />} />
                 <Route path="general-details" element={<GeneralDetails />} />
                 <Route path="documents" element={<GeneralDetails />} />
@@ -41,29 +41,29 @@ function App() {
                 <Route path="savings" element={<GeneralDetails />} />
                 <Route path="app-and-system" element={<GeneralDetails />} />
               </Route>
-              <Route path="guarantors" element={<Users />} />
-              <Route path="loans" element={<Users />} />
-              <Route path="decision-models" element={<Users />} />
-              <Route path="savings" element={<Users />} />
-              <Route path="loan-requests" element={<Users />} />
-              <Route path="whitelist" element={<Users />} />
-              <Route path="karma" element={<Users />} />
-              <Route path="organization" element={<Users />} />
-              <Route path="loan-products" element={<Users />} />
-              <Route path="saving-products" element={<Users />} />
-              <Route path="fees-and-charges" element={<Users />} />
-              <Route path="transactions" element={<Users />} />
-              <Route path="services" element={<Users />} />
-              <Route path="service-account" element={<Users />} />
-              <Route path="settlements" element={<Users />} />
-              <Route path="reports" element={<Users />} />
-              <Route path="preferences" element={<Users />} />
-              <Route path="fees-and-pricing" element={<Users />} />
-              <Route path="audit-logs" element={<Users />} />
-              <Route path="systems-messages" element={<Users />} />
+              <Route path="/guarantors" element={<Users />} />
+              <Route path="/loans" element={<Users />} />
+              <Route path="/decision-models" element={<Users />} />
+              <Route path="/savings" element={<Users />} />
+              <Route path="/loan-requests" element={<Users />} />
+              <Route path="/whitelist" element={<Users />} />
+              <Route path="/karma" element={<Users />} />
+              <Route path="/organization" element={<Users />} />
+              <Route path="/loan-products" element={<Users />} />
+              <Route path="/saving-products" element={<Users />} />
+              <Route path="/fees-and-charges" element={<Users />} />
+              <Route path="/transactions" element={<Users />} />
+              <Route path="/services" element={<Users />} />
+              <Route path="/service-account" element={<Users />} />
+              <Route path="/settlements" element={<Users />} />
+              <Route path="/reports" element={<Users />} />
+              <Route path="/preferences" element={<Users />} />
+              <Route path="/fees-and-pricing" element={<Users />} />
+              <Route path="/audit-logs" element={<Users />} />
+              <Route path="/systems-messages" element={<Users />} />
             </Route>
-            <Route index element={<Navigate replace to={'login'} />} />
-            <Route path="login" element={<LoginPage />} />
+            <Route index element={<Navigate replace to={'/login'} />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </AuthContextProvider>

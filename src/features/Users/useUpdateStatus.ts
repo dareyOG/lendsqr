@@ -1,25 +1,23 @@
 import { useState, useEffect } from 'react';
-import { UsersPropType } from '../../types';
 import { useUsers } from './useUsers';
+
+import { UsersPropType } from '../../types';
 
 export function useUpdateStatus() {
   const { users, isLoadingUsers } = useUsers();
 
-  const status = ['active', 'blacklisted', 'pending', 'inactive'];
-
-  const usersWithStatus: UsersPropType[] = users?.map((user: UsersPropType) => ({
-    ...user,
-    status: status[+user.id % status.length]
-  }));
+  // console.log(users);
 
   const [usersUpdate, setUsersUpdate] = useState<UsersPropType[]>(() => {
-    const users = localStorage.getItem('users');
-    return users ? JSON.parse(users) : usersWithStatus;
+    const stored_users = localStorage.getItem('users');
+    // console.log(stored_users);
+
+    return stored_users?.length ? JSON.parse(stored_users) : users;
   });
 
   useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(usersUpdate));
-  }, [usersUpdate]);
+    if (users?.length) localStorage.setItem('users', JSON.stringify(usersUpdate));
+  }, [usersUpdate, users?.length]);
 
   const activate = (id: string) => {
     setUsersUpdate(

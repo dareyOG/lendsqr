@@ -11,8 +11,10 @@ function Stat({ icon, title, stat, color }: StatPropType) {
   return (
     <div className="flex flex-col gap-4 bg-white p-[2rem] [&>*]:w-fit">
       <div className={`border-transparent rounded-full p-4 ${colorVariants[color]}`}>{icon}</div>
-      <div className="text-secondary uppercase text-nowrap text-[1.4rem] font-medium">{title}</div>
-      <div className="font-semibold text-[2.4rem]">{stat}</div>
+      <div className="text-secondary uppercase text-nowrap text-[1.8rem] md:text-[1.6rem] lg:text-[1.4rem] font-medium">
+        {title}
+      </div>
+      <div className="font-semibold text-[3rem] lg:text-[2.4rem]">{stat}</div>
     </div>
   );
 }

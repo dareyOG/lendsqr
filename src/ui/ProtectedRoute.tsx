@@ -6,19 +6,11 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      if (!localStorage.get('users') || (!localStorage.getItem('curr_user') && !isAuthenticated)) {
-        localStorage.clear();
-        navigate('/login', { replace: true });
-      }
-    };
+  const token = localStorage.getItem('token');
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, [navigate, isAuthenticated]);
+  useEffect(() => {
+    if (!isAuthenticated && !token) navigate('/login', { replace: true });
+  }, [isAuthenticated, token, navigate]);
 
   return children;
 }

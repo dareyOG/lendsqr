@@ -67,7 +67,7 @@
 }
 
 body {
-  @apply h-screen text-[1.6rem] font-normal leading-[1.5] text-primary bg-white;
+  @apply h-screen text-[1.2rem] lg:text-[1.6rem] font-normal leading-[1.5] text-primary bg-white;
 }
 
 .active {

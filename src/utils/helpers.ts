@@ -49,4 +49,6 @@ export function formatDate(date: string) {
   });
 }
 
-export function formatAmount() {}
+export function formatNumber(value: string) {
+  return new Intl.NumberFormat().format(+value);
+}

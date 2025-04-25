@@ -15,7 +15,7 @@ export type SideBarMenuPropType<T> = {
 export type StatPropType = {
   icon: JSX.Element;
   title: string;
-  stat: number;
+  stat: string;
   color: 'users' | 'activeUsers' | 'loans' | 'savings';
 };
 
@@ -113,9 +113,12 @@ export type LoginPropType = {
 };
 
 export type AuthContextProviderPropType = {
-  username: string | null;
-  token: string;
   isAuthenticated: boolean;
-  login: (data: LoginPropType) => void;
+  login: (loginData: LoginPropType) => void;
   logout: () => void;
+};
+
+export type NavMenuContextPropType = {
+  isOpen: boolean;
+  toggleMenu: () => void;
 };

@@ -5,8 +5,6 @@ import { randomAlphaNumeric } from '../utils/helpers';
 import { AuthContextProviderPropType, LoginPropType } from '../types';
 
 const AuthContext = createContext<AuthContextProviderPropType>({
-  username: null,
-  token: '',
   isAuthenticated: false,
   login: () => {},
   logout: () => {}
@@ -14,33 +12,32 @@ const AuthContext = createContext<AuthContextProviderPropType>({
 
 function AuthContextProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
-  const storedInfo = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user') ?? '{}')
+
+  const storedInfo = localStorage.getItem('token')
+    ? JSON.parse(localStorage.getItem('token') ?? '')
     : null;
-  const [user, setUser] = useState<string | null>(storedInfo?.email);
-  const [token, setToken] = useState(storedInfo?.token || '');
-  const isAuthenticated = Boolean(token);
 
-  const username = user
-    ? user.replace(/[_0-9A-Z]/g, '').split('@')[0]
-    : localStorage.getItem('user');
+  const [token, setToken] = useState(storedInfo);
 
-  const login = (data: LoginPropType) => {
-    setUser(data.email);
-    setToken(randomAlphaNumeric(50));
-    localStorage.setItem('curr_user', JSON.stringify({ ...data, token: randomAlphaNumeric(50) }));
+  const isAuthenticated = Boolean(token?.length);
+
+  const login = (loginData: LoginPropType) => {
+    localStorage.setItem(
+      'token',
+      JSON.stringify(
+        loginData.email.padStart(25, randomAlphaNumeric(5)).padEnd(30, randomAlphaNumeric(5))
+      )
+    );
     navigate('/users', { replace: true });
   };
 
   const logout = () => {
-    setUser(null);
     setToken('');
-    localStorage.clear();
     navigate('/login', { replace: true });
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, username, token, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -4,14 +4,16 @@ import { useUpdateStatus } from '../features/Users/useUpdateStatus';
 import Button from './Button';
 
 function Filter() {
-  const { usersUpdate, setUsersUpdate } = useUpdateStatus();
-
   const [organization, setOrganization] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('');
+
+  const { usersUpdate, setUsersUpdate } = useUpdateStatus();
+
+  console.log(usersUpdate);
 
   const reset = () => {
     setOrganization('');
@@ -24,8 +26,10 @@ function Filter() {
 
   const filter = () => {
     const filteredResult = usersUpdate.slice().filter(user => user.status === status);
+    console.log(filteredResult);
+
     if (!status) return;
-    else setUsersUpdate(filteredResult);
+    setUsersUpdate(filteredResult);
 
     return usersUpdate;
   };

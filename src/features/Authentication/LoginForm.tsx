@@ -46,7 +46,7 @@ function LoginForm() {
             }
           })}
           placeholder=""
-          className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent text-accent ${
+          className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[35rem] lg:w-[44.7rem] focus:outline-accent text-accent ${
             !errors.email ? '' : 'text-blacklist'
           } focus:text-secondary`}
         />
@@ -63,14 +63,14 @@ function LoginForm() {
             }
           })}
           placeholder=""
-          className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[44.7rem] focus:outline-accent text-accent ${
+          className={`peer p-5 border rounded-[0.5rem] border-secondary/20 w-[35rem] lg:w-[44.7rem] focus:outline-accent text-accent ${
             !errors.password ? '' : 'text-blacklist'
           } focus:text-secondary`}
         />
         <span
           role="button"
           onClick={togglePassword}
-          className="absolute uppercase text-[1.2rem] font-semibold text-accent top-[50%] right-[1rem] transform -translate-y-1/2 cursor-pointer"
+          className="absolute uppercase text-[1.2rem] font-semibold text-accent top-[50%] right-[1.5rem] transform -translate-y-1/2 cursor-pointer"
         >
           {showPassword ? 'hide' : 'show'}
         </span>
@@ -81,7 +81,7 @@ function LoginForm() {
       >
         Forgot password?
       </div>
-      <button className="bg-accent w-full p-5 rounded-[0.8rem] uppercase text-[1.4rem] text-white font-semibold hover:bg-accent/50 cursor-pointer">
+      <button className="bg-accent w-full p-5 rounded-[0.8rem] uppercase text-[1.4rem] text-white font-semibold hover:bg-primary cursor-pointer">
         log in
       </button>
     </form>

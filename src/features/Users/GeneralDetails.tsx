@@ -4,8 +4,9 @@ import { useUpdateStatus } from './useUpdateStatus';
 import DetailInfo from '../../ui/DetailInfo';
 import SectionDetail from '../../ui/SectionDetail';
 
-import { UsersPropType } from '../../types';
 import { formatPhoneNumber } from '../../utils/helpers';
+import { UsersPropType } from '../../types';
+import { formatPrice } from 'formatnumber-to-naira';
 
 function GeneralDetails() {
   const { username } = useParams();
@@ -30,7 +31,7 @@ function GeneralDetails() {
         <DetailInfo title="type of residence" value={"parent's apartment"} />
       </SectionDetail>
 
-      <SectionDetail sectionTitle="Education and Employment" className="grid-cols-4">
+      <SectionDetail sectionTitle="Education and Employment" className="lg:grid-cols-4">
         <DetailInfo title="level of education" value={selectedUser?.education?.level ?? ''} />
         <DetailInfo
           title="employment status"
@@ -41,12 +42,20 @@ function GeneralDetails() {
           title="duration of employment"
           value={selectedUser?.education?.duration ?? ''}
         />
-        <DetailInfo title="office email" value={selectedUser?.education?.officeEmail ?? ''} />
+        <DetailInfo
+          title="office email"
+          value={selectedUser?.education?.officeEmail.toLowerCase() ?? ''}
+        />
         <DetailInfo
           title="monthly income"
-          value={`${selectedUser?.education?.monthlyIncome[0]} - ${selectedUser?.education?.monthlyIncome[1]}`}
+          value={`${formatPrice(+selectedUser?.education?.monthlyIncome[0])} - ${formatPrice(
+            +selectedUser?.education?.monthlyIncome[1]
+          )}`}
         />
-        <DetailInfo title="loan repayment" value={selectedUser?.education?.loanRepayment ?? ''} />
+        <DetailInfo
+          title="loan repayment"
+          value={formatPrice(+selectedUser?.education?.loanRepayment) ?? ''}
+        />
       </SectionDetail>
 
       <SectionDetail sectionTitle="Socials">

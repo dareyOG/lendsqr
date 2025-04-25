@@ -1,6 +1,8 @@
 import { FaRegUser, FaStar } from 'react-icons/fa6';
 import { FaStarHalfAlt } from 'react-icons/fa';
+
 import { UsersPropType } from '../../types';
+import { formatPrice } from 'formatnumber-to-naira';
 
 function UserDetailsHeader({ selectedUser }: { selectedUser: UsersPropType }) {
   return (
@@ -27,7 +29,7 @@ function UserDetailsHeader({ selectedUser }: { selectedUser: UsersPropType }) {
         </div>
       </div>
       <div>
-        <p className="text-[2.2rem] font-medium">{selectedUser?.accountBalance}</p>
+        <p className="text-[2.2rem] font-medium">{formatPrice(+selectedUser?.accountBalance)}</p>
         <p className="text-[1.2rem] capitalize">{selectedUser?.accountNumber}&#47;providus bank</p>
       </div>
     </div>
